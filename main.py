@@ -17,19 +17,30 @@ def main() -> None:
         print("NetFury - Benchmark 360")
         print()
         print("Commands:")
-        print("  pipeline  - Run extraction pipeline for ISPs")
-        print("  evaluate  - Run multi-model evaluation")
+        print("  benchmark-full - Extract ALL ISPs with 30+ fields (enhanced HTML)")
+        print("  benchmark      - Extract ALL ISPs (basic OCR/LLM)")
+        print("  pipeline       - Run extraction pipeline for single/all ISPs")
+        print("  evaluate       - Run multi-model evaluation")
         print()
         print("Examples:")
+        print("  uv run python main.py benchmark-full")
+        print("  uv run python main.py benchmark-full --isp xtrim")
+        print("  uv run python main.py benchmark-full --cached")
+        print("  uv run python main.py benchmark --strategy llm --model gpt-4o")
         print("  uv run python main.py pipeline --isp xtrim --strategy llm")
-        print("  uv run python main.py pipeline --strategy llm")
         print("  uv run python main.py evaluate --isp xtrim")
         return
 
     command = sys.argv[1]
     sys.argv = [sys.argv[0]] + sys.argv[2:]  # Strip command for argparse
 
-    if command == "pipeline":
+    if command == "benchmark-full":
+        from pipeline.benchmark_full import main as run_benchmark_full
+        run_benchmark_full()
+    elif command == "benchmark":
+        from pipeline.benchmark import main as run_benchmark
+        run_benchmark()
+    elif command == "pipeline":
         from pipeline.runner import main as run_pipeline
         run_pipeline()
     elif command == "evaluate":
