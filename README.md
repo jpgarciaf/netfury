@@ -28,14 +28,13 @@ netfury/
 ├── docs/               # Documentacion y tareas
 │   ├── TASKS_SCRAPER.md
 │   └── TASKS_WEB.md
-├── requirements.txt
+├── pyproject.toml      # Dependencias y config del proyecto (uv)
+├── uv.lock             # Lockfile de dependencias
 └── README.md
 ```
 
 ## Setup
 
 ```bash
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+uv sync
 ```
