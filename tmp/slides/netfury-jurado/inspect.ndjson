@@ -1,0 +1,164 @@
+{"kind":"deck","id":"netfury-jurado","slideCount":5,"slideSize":{"width":1280,"height":720}}
+{"kind":"slide","slide":1,"id":"956pjz"}
+{"kind":"slide","slide":2,"id":"dizdak"}
+{"kind":"slide","slide":3,"id":"p4o82c"}
+{"kind":"slide","slide":4,"id":"uzycsy"}
+{"kind":"slide","slide":5,"id":"odtfgq"}
+{"kind":"shape","slide":1,"id":"2","role":"bg orb","shapeType":"ellipse","bbox":[860,-120,420,420]}
+{"kind":"shape","slide":1,"id":"3","role":"bg orb","shapeType":"ellipse","bbox":[1030,420,280,280]}
+{"kind":"shape","slide":1,"id":"4","role":"bg orb","shapeType":"ellipse","bbox":[-140,520,320,320]}
+{"kind":"shape","slide":1,"id":"5","role":"bg side panel","shapeType":"rect","bbox":[1016,0,264,720]}
+{"kind":"shape","slide":1,"id":"6","role":"bg footer band","shapeType":"rect","bbox":[0,680,1280,40]}
+{"kind":"shape","slide":1,"id":"7","role":"cover contrast overlay","shapeType":"rect","bbox":[0,0,1280,720]}
+{"kind":"shape","slide":1,"id":"8","role":"cover accent rule","shapeType":"rect","bbox":[64,86,7,455]}
+{"kind":"textbox","slide":1,"id":"9","role":"kicker","text":"NetFury / Benchmark 360","textPreview":"NetFury / Benchmark 360","textChars":23,"textLines":1,"bbox":[86,88,520,26]}
+{"kind":"textbox","slide":1,"id":"10","role":"cover title","text":"Infraestructura de inteligencia competitiva para el mercado ISP","textPreview":"Infraestructura de inteligencia competitiva para el mercado ISP","textChars":63,"textLines":1,"bbox":[82,130,785,184]}
+{"kind":"textbox","slide":1,"id":"11","role":"cover subtitle","text":"Convertimos el mercado ISP en un sistema observable en tiempo casi real para pricing, benchmarking y respuesta comercial.","textPreview":"Convertimos el mercado ISP en un sistema observable en tiempo casi real para pricing, benchmarking y respuesta comercial.","textChars":121,"textLines":1,"bbox":[86,326,610,86]}
+{"kind":"shape","slide":1,"id":"12","role":"cover evidence panel","shapeType":"roundRect","bbox":[764,132,402,340]}
+{"kind":"textbox","slide":1,"id":"13","role":"cover side kicker","text":"Senales ya visibles","textPreview":"Senales ya visibles","textChars":19,"textLines":1,"bbox":[796,164,250,24]}
+{"kind":"textbox","slide":1,"id":"14","role":"cover stat","text":"8 ISPs objetivo","textPreview":"8 ISPs objetivo","textChars":15,"textLines":1,"bbox":[796,210,300,34]}
+{"kind":"textbox","slide":1,"id":"15","role":"cover stat","text":"30+ campos normalizados","textPreview":"30+ campos normalizados","textChars":23,"textLines":1,"bbox":[796,258,320,34]}
+{"kind":"textbox","slide":1,"id":"16","role":"cover stat","text":"Parquet listo para comparar","textPreview":"Parquet listo para comparar","textChars":27,"textLines":1,"bbox":[796,306,320,34]}
+{"kind":"textbox","slide":1,"id":"17","role":"cover side body","text":"Backend funcional, benchmarking real y base lista para demo competitiva.","textPreview":"Backend funcional, benchmarking real y base lista para demo competitiva.","textChars":72,"textLines":1,"bbox":[796,364,318,78]}
+{"kind":"shape","slide":1,"id":"18","role":"cover moment panel","shapeType":"roundRect","bbox":[86,456,390,92]}
+{"kind":"textbox","slide":1,"id":"19","role":"cover moment","text":"De scraping a sensor competitivo en tiempo casi real.","textPreview":"De scraping a sensor competitivo en tiempo casi real.","textChars":53,"textLines":1,"bbox":[112,478,336,40]}
+{"kind":"textbox","slide":1,"id":"20","role":"caption","text":"NetFury / Benchmark 360","textPreview":"NetFury / Benchmark 360","textChars":23,"textLines":1,"bbox":[64,674,260,22]}
+{"kind":"shape","slide":2,"id":"2","role":"bg orb","shapeType":"ellipse","bbox":[860,-120,420,420]}
+{"kind":"shape","slide":2,"id":"3","role":"bg orb","shapeType":"ellipse","bbox":[1030,420,280,280]}
+{"kind":"shape","slide":2,"id":"4","role":"bg orb","shapeType":"ellipse","bbox":[-140,520,320,320]}
+{"kind":"shape","slide":2,"id":"5","role":"bg side panel","shapeType":"rect","bbox":[1016,0,264,720]}
+{"kind":"shape","slide":2,"id":"6","role":"bg footer band","shapeType":"rect","bbox":[0,680,1280,40]}
+{"kind":"shape","slide":2,"id":"7","role":"content contrast overlay","shapeType":"rect","bbox":[0,0,1280,720]}
+{"kind":"textbox","slide":2,"id":"8","role":"header","text":"PROBLEMA","textPreview":"PROBLEMA","textChars":8,"textLines":1,"bbox":[64,34,430,24]}
+{"kind":"textbox","slide":2,"id":"9","role":"header","text":"02 / 05","textPreview":"02 / 05","textChars":7,"textLines":1,"bbox":[1114,34,104,24]}
+{"kind":"shape","slide":2,"id":"10","role":"header rule","shapeType":"rect","bbox":[64,64,1152,2]}
+{"kind":"shape","slide":2,"id":"11","role":"header marker","shapeType":"ellipse","bbox":[57,57,16,16]}
+{"kind":"textbox","slide":2,"id":"12","role":"title","text":"La informacion existe, pero no sirve para decidir rapido","textPreview":"La informacion existe, pero no sirve para decidir rapido","textChars":56,"textLines":1,"bbox":[64,86,760,142]}
+{"kind":"textbox","slide":2,"id":"13","role":"subtitle","text":"Los equipos comerciales y de producto ven precios, promos y bundles en formatos distintos, cambiantes y poco comparables.","textPreview":"Los equipos comerciales y de producto ven precios, promos y bundles en formatos distintos, cambiantes y poco comparables.","textChars":121,"textLines":1,"bbox":[66,234,720,70]}
+{"kind":"shape","slide":2,"id":"14","role":"card panel: Fragmentada","shapeType":"roundRect","bbox":[84,372,355.3333333333333,228]}
+{"kind":"shape","slide":2,"id":"15","role":"card accent: Fragmentada","shapeType":"rect","bbox":[84,372,8,228]}
+{"kind":"shape","slide":2,"id":"16","role":"icon badge","shapeType":"ellipse","bbox":[106,396,54,54]}
+{"kind":"shape","slide":2,"id":"17","role":"icon glyph","shapeType":"rect","bbox":[122,425,6,12]}
+{"kind":"shape","slide":2,"id":"18","role":"icon glyph","shapeType":"rect","bbox":[131,417,6,20]}
+{"kind":"shape","slide":2,"id":"19","role":"icon glyph","shapeType":"rect","bbox":[140,410,6,27]}
+{"kind":"textbox","slide":2,"id":"20","role":"card label","text":"Fragmentada","textPreview":"Fragmentada","textChars":11,"textLines":1,"bbox":[172,394,247.33333333333331,28]}
+{"kind":"textbox","slide":2,"id":"21","role":"card body: Fragmentada","text":"Cada ISP publica planes,\ndescuentos y beneficios en\nestructuras distintas: HTML\ndinamico, imagenes, sliders\ny textos no normalizados.","textPreview":"Cada ISP publica planes, | descuentos y beneficios en | estructuras distintas: HTML | dinamico, imagenes, sliders | y textos no normalizados.","textChars":133,"textLines":5,"bbox":[108,458,307.3333333333333,120]}
+{"kind":"shape","slide":2,"id":"22","role":"card panel: Volatil","shapeType":"roundRect","bbox":[463.3333333333333,372,355.3333333333333,228]}
+{"kind":"shape","slide":2,"id":"23","role":"card accent: Volatil","shapeType":"rect","bbox":[463.3333333333333,372,8,228]}
+{"kind":"shape","slide":2,"id":"24","role":"icon badge","shapeType":"ellipse","bbox":[485.3333333333333,396,54,54]}
+{"kind":"shape","slide":2,"id":"25","role":"icon glyph","shapeType":"ellipse","bbox":[498.3333333333333,414,10,10]}
+{"kind":"shape","slide":2,"id":"26","role":"icon glyph","shapeType":"ellipse","bbox":[516.3333333333333,423,10,10]}
+{"kind":"shape","slide":2,"id":"27","role":"icon glyph","shapeType":"rect","bbox":[507.3333333333333,421,19,3]}
+{"kind":"textbox","slide":2,"id":"28","role":"card label","text":"Volatil","textPreview":"Volatil","textChars":7,"textLines":1,"bbox":[551.3333333333333,394,247.33333333333331,28]}
+{"kind":"textbox","slide":2,"id":"29","role":"card body: Volatil","text":"Las promociones cambian mas\nrapido que los ciclos\nmanuales de monitoreo,\ndejando decisiones\ncomerciales desfasadas.","textPreview":"Las promociones cambian mas | rapido que los ciclos | manuales de monitoreo, | dejando decisiones | comerciales desfasadas.","textChars":115,"textLines":5,"bbox":[487.3333333333333,458,307.3333333333333,120]}
+{"kind":"shape","slide":2,"id":"30","role":"card panel: Inutilizable","shapeType":"roundRect","bbox":[842.6666666666666,372,355.3333333333333,228]}
+{"kind":"shape","slide":2,"id":"31","role":"card accent: Inutilizable","shapeType":"rect","bbox":[842.6666666666666,372,8,228]}
+{"kind":"shape","slide":2,"id":"32","role":"icon badge","shapeType":"ellipse","bbox":[864.6666666666666,396,54,54]}
+{"kind":"shape","slide":2,"id":"33","role":"icon glyph","shapeType":"roundRect","bbox":[877.6666666666666,411,26,13]}
+{"kind":"shape","slide":2,"id":"34","role":"icon glyph","shapeType":"roundRect","bbox":[882.6666666666666,420,26,13]}
+{"kind":"shape","slide":2,"id":"35","role":"icon glyph","shapeType":"roundRect","bbox":[887.6666666666666,429,20,10]}
+{"kind":"textbox","slide":2,"id":"36","role":"card label","text":"Inutilizable","textPreview":"Inutilizable","textChars":12,"textLines":1,"bbox":[930.6666666666666,394,247.33333333333331,28]}
+{"kind":"textbox","slide":2,"id":"37","role":"card body: Inutilizable","text":"Sin una estructura comun no\nhay forma confiable de\ncomparar precio, velocidad,\nbundles y valor percibido\nentre proveedores.","textPreview":"Sin una estructura comun no | hay forma confiable de | comparar precio, velocidad, | bundles y valor percibido | entre proveedores.","textChars":123,"textLines":5,"bbox":[866.6666666666666,458,307.3333333333333,120]}
+{"kind":"textbox","slide":2,"id":"38","role":"caption","text":"NetFury / Benchmark 360","textPreview":"NetFury / Benchmark 360","textChars":23,"textLines":1,"bbox":[64,674,260,22]}
+{"kind":"shape","slide":3,"id":"2","role":"bg orb","shapeType":"ellipse","bbox":[860,-120,420,420]}
+{"kind":"shape","slide":3,"id":"3","role":"bg orb","shapeType":"ellipse","bbox":[1030,420,280,280]}
+{"kind":"shape","slide":3,"id":"4","role":"bg orb","shapeType":"ellipse","bbox":[-140,520,320,320]}
+{"kind":"shape","slide":3,"id":"5","role":"bg side panel","shapeType":"rect","bbox":[1016,0,264,720]}
+{"kind":"shape","slide":3,"id":"6","role":"bg footer band","shapeType":"rect","bbox":[0,680,1280,40]}
+{"kind":"shape","slide":3,"id":"7","role":"content contrast overlay","shapeType":"rect","bbox":[0,0,1280,720]}
+{"kind":"textbox","slide":3,"id":"8","role":"header","text":"SOLUCION","textPreview":"SOLUCION","textChars":8,"textLines":1,"bbox":[64,34,430,24]}
+{"kind":"textbox","slide":3,"id":"9","role":"header","text":"03 / 05","textPreview":"03 / 05","textChars":7,"textLines":1,"bbox":[1114,34,104,24]}
+{"kind":"shape","slide":3,"id":"10","role":"header rule","shapeType":"rect","bbox":[64,64,1152,2]}
+{"kind":"shape","slide":3,"id":"11","role":"header marker","shapeType":"ellipse","bbox":[57,57,16,16]}
+{"kind":"textbox","slide":3,"id":"12","role":"title","text":"NetFury convierte sitios complejos en un benchmark utilizable","textPreview":"NetFury convierte sitios complejos en un benchmark utilizable","textChars":61,"textLines":1,"bbox":[64,86,760,142]}
+{"kind":"textbox","slide":3,"id":"13","role":"subtitle","text":"Un pipeline modular combina captura, extraccion multiestrategia, validacion y exportacion lista para analisis.","textPreview":"Un pipeline modular combina captura, extraccion multiestrategia, validacion y exportacion lista para analisis.","textChars":110,"textLines":1,"bbox":[66,234,720,70]}
+{"kind":"shape","slide":3,"id":"14","role":"card panel: Captura","shapeType":"roundRect","bbox":[84,372,355.3333333333333,228]}
+{"kind":"shape","slide":3,"id":"15","role":"card accent: Captura","shapeType":"rect","bbox":[84,372,8,228]}
+{"kind":"shape","slide":3,"id":"16","role":"icon badge","shapeType":"ellipse","bbox":[106,396,54,54]}
+{"kind":"shape","slide":3,"id":"17","role":"icon glyph","shapeType":"rect","bbox":[122,425,6,12]}
+{"kind":"shape","slide":3,"id":"18","role":"icon glyph","shapeType":"rect","bbox":[131,417,6,20]}
+{"kind":"shape","slide":3,"id":"19","role":"icon glyph","shapeType":"rect","bbox":[140,410,6,27]}
+{"kind":"textbox","slide":3,"id":"20","role":"card label","text":"Captura","textPreview":"Captura","textChars":7,"textLines":1,"bbox":[172,394,247.33333333333331,28]}
+{"kind":"textbox","slide":3,"id":"21","role":"card body: Captura","text":"Spider generico con HTML y\nscreenshots para 8 ISPs\nobjetivo, incluyendo paginas\ncon contenido renderizado o\nvisual.","textPreview":"Spider generico con HTML y | screenshots para 8 ISPs | objetivo, incluyendo paginas | con contenido renderizado o | visual.","textChars":115,"textLines":5,"bbox":[108,458,307.3333333333333,120]}
+{"kind":"shape","slide":3,"id":"22","role":"card panel: Extraccion","shapeType":"roundRect","bbox":[463.3333333333333,372,355.3333333333333,228]}
+{"kind":"shape","slide":3,"id":"23","role":"card accent: Extraccion","shapeType":"rect","bbox":[463.3333333333333,372,8,228]}
+{"kind":"shape","slide":3,"id":"24","role":"icon badge","shapeType":"ellipse","bbox":[485.3333333333333,396,54,54]}
+{"kind":"shape","slide":3,"id":"25","role":"icon glyph","shapeType":"ellipse","bbox":[498.3333333333333,414,10,10]}
+{"kind":"shape","slide":3,"id":"26","role":"icon glyph","shapeType":"ellipse","bbox":[516.3333333333333,423,10,10]}
+{"kind":"shape","slide":3,"id":"27","role":"icon glyph","shapeType":"rect","bbox":[507.3333333333333,421,19,3]}
+{"kind":"textbox","slide":3,"id":"28","role":"card label","text":"Extraccion","textPreview":"Extraccion","textChars":10,"textLines":1,"bbox":[551.3333333333333,394,247.33333333333331,28]}
+{"kind":"textbox","slide":3,"id":"29","role":"card body: Extraccion","text":"HTML renderizado, OCR y LLM\nvision trabajan segun el\ntipo de pagina para\nmaximizar cobertura sin\ndepender de una sola\ntecnica.","textPreview":"HTML renderizado, OCR y LLM | vision trabajan segun el | tipo de pagina para | maximizar cobertura sin | depender de una sola | tecnica.","textChars":126,"textLines":6,"bbox":[487.3333333333333,458,307.3333333333333,120]}
+{"kind":"shape","slide":3,"id":"30","role":"card panel: Contrato","shapeType":"roundRect","bbox":[842.6666666666666,372,355.3333333333333,228]}
+{"kind":"shape","slide":3,"id":"31","role":"card accent: Contrato","shapeType":"rect","bbox":[842.6666666666666,372,8,228]}
+{"kind":"shape","slide":3,"id":"32","role":"icon badge","shapeType":"ellipse","bbox":[864.6666666666666,396,54,54]}
+{"kind":"shape","slide":3,"id":"33","role":"icon glyph","shapeType":"roundRect","bbox":[877.6666666666666,411,26,13]}
+{"kind":"shape","slide":3,"id":"34","role":"icon glyph","shapeType":"roundRect","bbox":[882.6666666666666,420,26,13]}
+{"kind":"shape","slide":3,"id":"35","role":"icon glyph","shapeType":"roundRect","bbox":[887.6666666666666,429,20,10]}
+{"kind":"textbox","slide":3,"id":"36","role":"card label","text":"Contrato","textPreview":"Contrato","textChars":8,"textLines":1,"bbox":[930.6666666666666,394,247.33333333333331,28]}
+{"kind":"textbox","slide":3,"id":"37","role":"card body: Contrato","text":"Un esquema Pydantic de 30+\ncampos normaliza precios,\nvelocidades, descuentos y\nservicios adicionales para\nexportar parquet, csv y\njson.","textPreview":"Un esquema Pydantic de 30+ | campos normaliza precios, | velocidades, descuentos y | servicios adicionales para | exportar parquet, csv y | json.","textChars":135,"textLines":6,"bbox":[866.6666666666666,458,307.3333333333333,120]}
+{"kind":"textbox","slide":3,"id":"38","role":"caption","text":"NetFury / Benchmark 360","textPreview":"NetFury / Benchmark 360","textChars":23,"textLines":1,"bbox":[64,674,260,22]}
+{"kind":"shape","slide":4,"id":"2","role":"bg orb","shapeType":"ellipse","bbox":[860,-120,420,420]}
+{"kind":"shape","slide":4,"id":"3","role":"bg orb","shapeType":"ellipse","bbox":[1030,420,280,280]}
+{"kind":"shape","slide":4,"id":"4","role":"bg orb","shapeType":"ellipse","bbox":[-140,520,320,320]}
+{"kind":"shape","slide":4,"id":"5","role":"bg side panel","shapeType":"rect","bbox":[1016,0,264,720]}
+{"kind":"shape","slide":4,"id":"6","role":"bg footer band","shapeType":"rect","bbox":[0,680,1280,40]}
+{"kind":"shape","slide":4,"id":"7","role":"metrics contrast overlay","shapeType":"rect","bbox":[0,0,1280,720]}
+{"kind":"textbox","slide":4,"id":"8","role":"header","text":"EVIDENCIA","textPreview":"EVIDENCIA","textChars":9,"textLines":1,"bbox":[64,34,430,24]}
+{"kind":"textbox","slide":4,"id":"9","role":"header","text":"04 / 05","textPreview":"04 / 05","textChars":7,"textLines":1,"bbox":[1114,34,104,24]}
+{"kind":"shape","slide":4,"id":"10","role":"header rule","shapeType":"rect","bbox":[64,64,1152,2]}
+{"kind":"shape","slide":4,"id":"11","role":"header marker","shapeType":"ellipse","bbox":[57,57,16,16]}
+{"kind":"textbox","slide":4,"id":"12","role":"title","text":"Ya funciona con datos reales y salida estructurada","textPreview":"Ya funciona con datos reales y salida estructurada","textChars":50,"textLines":1,"bbox":[64,86,700,142]}
+{"kind":"textbox","slide":4,"id":"13","role":"subtitle","text":"Esto no es un demo: es una corrida real con datos extraidos hoy del mercado y convertidos en comparativas accionables.","textPreview":"Esto no es un demo: es una corrida real con datos extraidos hoy del mercado y convertidos en comparativas accionables.","textChars":118,"textLines":1,"bbox":[66,234,700,70]}
+{"kind":"shape","slide":4,"id":"14","role":"metric panel: Planes reales extraidos en la corrida actual","shapeType":"roundRect","bbox":[92,404,330,174]}
+{"kind":"shape","slide":4,"id":"15","role":"metric accent: Planes reales extraidos en la corrida actual","shapeType":"rect","bbox":[92,404,330,7]}
+{"kind":"textbox","slide":4,"id":"16","role":"metric value","text":"10 planes","textPreview":"10 planes","textChars":9,"textLines":1,"bbox":[114,428,286,54]}
+{"kind":"textbox","slide":4,"id":"17","role":"metric label","text":"Planes reales extraidos en la corrida actual","textPreview":"Planes reales extraidos en la corrida actual","textChars":44,"textLines":1,"bbox":[116,486,282,38]}
+{"kind":"textbox","slide":4,"id":"18","role":"metric note","text":"benchmark_summary.json","textPreview":"benchmark_summary.json","textChars":22,"textLines":1,"bbox":[116,536,282,22]}
+{"kind":"shape","slide":4,"id":"19","role":"metric panel: ISPs con datos comparables hoy","shapeType":"roundRect","bbox":[462,404,330,174]}
+{"kind":"shape","slide":4,"id":"20","role":"metric accent: ISPs con datos comparables hoy","shapeType":"rect","bbox":[462,404,330,7]}
+{"kind":"textbox","slide":4,"id":"21","role":"metric value","text":"3 de 8","textPreview":"3 de 8","textChars":6,"textLines":1,"bbox":[484,428,286,54]}
+{"kind":"textbox","slide":4,"id":"22","role":"metric label","text":"ISPs con datos comparables hoy","textPreview":"ISPs con datos comparables hoy","textChars":30,"textLines":1,"bbox":[486,486,282,38]}
+{"kind":"textbox","slide":4,"id":"23","role":"metric note","text":"Netlife, Claro, Xtrim","textPreview":"Netlife, Claro, Xtrim","textChars":21,"textLines":1,"bbox":[486,536,282,22]}
+{"kind":"shape","slide":4,"id":"24","role":"metric panel: Mejor costo por Mbps observado","shapeType":"roundRect","bbox":[832,404,330,174]}
+{"kind":"shape","slide":4,"id":"25","role":"metric accent: Mejor costo por Mbps observado","shapeType":"rect","bbox":[832,404,330,7]}
+{"kind":"textbox","slide":4,"id":"26","role":"metric value","text":"0.0315","textPreview":"0.0315","textChars":6,"textLines":1,"bbox":[854,428,286,54]}
+{"kind":"textbox","slide":4,"id":"27","role":"metric label","text":"Mejor costo por Mbps observado","textPreview":"Mejor costo por Mbps observado","textChars":30,"textLines":1,"bbox":[856,486,282,38]}
+{"kind":"textbox","slide":4,"id":"28","role":"metric note","text":"Netlife Plan 1000 Mbps","textPreview":"Netlife Plan 1000 Mbps","textChars":22,"textLines":1,"bbox":[856,536,282,22]}
+{"kind":"textbox","slide":4,"id":"29","role":"caption","text":"NetFury / Benchmark 360","textPreview":"NetFury / Benchmark 360","textChars":23,"textLines":1,"bbox":[64,674,260,22]}
+{"kind":"shape","slide":5,"id":"2","role":"bg orb","shapeType":"ellipse","bbox":[860,-120,420,420]}
+{"kind":"shape","slide":5,"id":"3","role":"bg orb","shapeType":"ellipse","bbox":[1030,420,280,280]}
+{"kind":"shape","slide":5,"id":"4","role":"bg orb","shapeType":"ellipse","bbox":[-140,520,320,320]}
+{"kind":"shape","slide":5,"id":"5","role":"bg side panel","shapeType":"rect","bbox":[1016,0,264,720]}
+{"kind":"shape","slide":5,"id":"6","role":"bg footer band","shapeType":"rect","bbox":[0,680,1280,40]}
+{"kind":"shape","slide":5,"id":"7","role":"content contrast overlay","shapeType":"rect","bbox":[0,0,1280,720]}
+{"kind":"textbox","slide":5,"id":"8","role":"header","text":"IMPACTO","textPreview":"IMPACTO","textChars":7,"textLines":1,"bbox":[64,34,430,24]}
+{"kind":"textbox","slide":5,"id":"9","role":"header","text":"05 / 05","textPreview":"05 / 05","textChars":7,"textLines":1,"bbox":[1114,34,104,24]}
+{"kind":"shape","slide":5,"id":"10","role":"header rule","shapeType":"rect","bbox":[64,64,1152,2]}
+{"kind":"shape","slide":5,"id":"11","role":"header marker","shapeType":"ellipse","bbox":[57,57,16,16]}
+{"kind":"textbox","slide":5,"id":"12","role":"title","text":"El valor no es scrapear: es acelerar decisiones competitivas","textPreview":"El valor no es scrapear: es acelerar decisiones competitivas","textChars":60,"textLines":1,"bbox":[64,86,760,142]}
+{"kind":"textbox","slide":5,"id":"13","role":"subtitle","text":"Hoy NetFury ya no es un prototipo. Es el primer paso para que el mercado ISP deje de ser incierto y se vuelva medible.","textPreview":"Hoy NetFury ya no es un prototipo. Es el primer paso para que el mercado ISP deje de ser incierto y se vuelva medible.","textChars":118,"textLines":1,"bbox":[66,234,720,70]}
+{"kind":"shape","slide":5,"id":"14","role":"card panel: Uso inmediato","shapeType":"roundRect","bbox":[84,372,355.3333333333333,228]}
+{"kind":"shape","slide":5,"id":"15","role":"card accent: Uso inmediato","shapeType":"rect","bbox":[84,372,8,228]}
+{"kind":"shape","slide":5,"id":"16","role":"icon badge","shapeType":"ellipse","bbox":[106,396,54,54]}
+{"kind":"shape","slide":5,"id":"17","role":"icon glyph","shapeType":"rect","bbox":[122,425,6,12]}
+{"kind":"shape","slide":5,"id":"18","role":"icon glyph","shapeType":"rect","bbox":[131,417,6,20]}
+{"kind":"shape","slide":5,"id":"19","role":"icon glyph","shapeType":"rect","bbox":[140,410,6,27]}
+{"kind":"textbox","slide":5,"id":"20","role":"card label","text":"Uso inmediato","textPreview":"Uso inmediato","textChars":13,"textLines":1,"bbox":[172,394,247.33333333333331,28]}
+{"kind":"textbox","slide":5,"id":"21","role":"card body: Uso inmediato","text":"Ranking por dolar por Mbps,\ndeteccion de promociones y\ncomparacion de bundles para\nreaccion comercial mas\nrapida.","textPreview":"Ranking por dolar por Mbps, | deteccion de promociones y | comparacion de bundles para | reaccion comercial mas | rapida.","textChars":113,"textLines":5,"bbox":[108,458,307.3333333333333,120]}
+{"kind":"shape","slide":5,"id":"22","role":"card panel: Senal competitiva","shapeType":"roundRect","bbox":[463.3333333333333,372,355.3333333333333,228]}
+{"kind":"shape","slide":5,"id":"23","role":"card accent: Senal competitiva","shapeType":"rect","bbox":[463.3333333333333,372,8,228]}
+{"kind":"shape","slide":5,"id":"24","role":"icon badge","shapeType":"ellipse","bbox":[485.3333333333333,396,54,54]}
+{"kind":"shape","slide":5,"id":"25","role":"icon glyph","shapeType":"ellipse","bbox":[498.3333333333333,414,10,10]}
+{"kind":"shape","slide":5,"id":"26","role":"icon glyph","shapeType":"ellipse","bbox":[516.3333333333333,423,10,10]}
+{"kind":"shape","slide":5,"id":"27","role":"icon glyph","shapeType":"rect","bbox":[507.3333333333333,421,19,3]}
+{"kind":"textbox","slide":5,"id":"28","role":"card label","text":"Senal competitiva","textPreview":"Senal competitiva","textChars":17,"textLines":1,"bbox":[551.3333333333333,394,247.33333333333331,28]}
+{"kind":"textbox","slide":5,"id":"29","role":"card body: Senal competitiva","text":"En la corrida actual,\nNetlife lidera el costo\npromedio por Mbps extraido\ncon 0.0419 USD por Mbps\nfrente a Xtrim 0.0426 y\nClaro 0.0562.","textPreview":"En la corrida actual, | Netlife lidera el costo | promedio por Mbps extraido | con 0.0419 USD por Mbps | frente a Xtrim 0.0426 y | Claro 0.0562.","textChars":134,"textLines":6,"bbox":[487.3333333333333,458,307.3333333333333,120]}
+{"kind":"shape","slide":5,"id":"30","role":"card panel: Siguiente paso","shapeType":"roundRect","bbox":[842.6666666666666,372,355.3333333333333,228]}
+{"kind":"shape","slide":5,"id":"31","role":"card accent: Siguiente paso","shapeType":"rect","bbox":[842.6666666666666,372,8,228]}
+{"kind":"shape","slide":5,"id":"32","role":"icon badge","shapeType":"ellipse","bbox":[864.6666666666666,396,54,54]}
+{"kind":"shape","slide":5,"id":"33","role":"icon glyph","shapeType":"roundRect","bbox":[877.6666666666666,411,26,13]}
+{"kind":"shape","slide":5,"id":"34","role":"icon glyph","shapeType":"roundRect","bbox":[882.6666666666666,420,26,13]}
+{"kind":"shape","slide":5,"id":"35","role":"icon glyph","shapeType":"roundRect","bbox":[887.6666666666666,429,20,10]}
+{"kind":"textbox","slide":5,"id":"36","role":"card label","text":"Siguiente paso","textPreview":"Siguiente paso","textChars":14,"textLines":1,"bbox":[930.6666666666666,394,247.33333333333331,28]}
+{"kind":"textbox","slide":5,"id":"37","role":"card body: Siguiente paso","text":"Cerrar cobertura en los 8\nISPs, robustecer ground\ntruth y empaquetar una demo\nfinal lista para jurado,\nventas o inteligencia de\nmercado.","textPreview":"Cerrar cobertura en los 8 | ISPs, robustecer ground | truth y empaquetar una demo | final lista para jurado, | ventas o inteligencia de | mercado.","textChars":136,"textLines":6,"bbox":[866.6666666666666,458,307.3333333333333,120]}
+{"kind":"textbox","slide":5,"id":"38","role":"caption","text":"NetFury / Benchmark 360","textPreview":"NetFury / Benchmark 360","textChars":23,"textLines":1,"bbox":[64,674,260,22]}
