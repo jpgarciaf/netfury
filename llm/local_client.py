@@ -62,3 +62,34 @@ class LocalClient(BaseLLMClient):
             output_tokens=eval_count,
             model=self.model,
         )
+
+    def extract_from_text(
+        self,
+        text: str,
+        prompt: str,
+    ) -> LLMResponse:
+        """Send text to Ollama local model and get extraction response."""
+        payload = {
+            "model": self.model,
+            "prompt": f"{prompt}\n\n{text}",
+            "stream": False,
+        }
+
+        with httpx.Client(timeout=120.0) as client:
+            response = client.post(
+                f"{self._base_url}/api/generate",
+                json=payload,
+            )
+            response.raise_for_status()
+            data = response.json()
+
+        content = data.get("response", "")
+        eval_count = data.get("eval_count", 0)
+        prompt_eval_count = data.get("prompt_eval_count", 0)
+
+        return LLMResponse(
+            content=content,
+            input_tokens=prompt_eval_count,
+            output_tokens=eval_count,
+            model=self.model,
+        )

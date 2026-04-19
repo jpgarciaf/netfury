@@ -128,12 +128,18 @@ class RecursiveCrawler:
         Returns:
             List of CrawlResult for each visited page.
         """
+        from pathlib import Path
+
         from extractors.full_html_extractor import _get_rendered_html
 
         cfg = self._config
         results: list[CrawlResult] = []
         queue: deque[tuple[str, int]] = deque()
         self._visited.clear()
+
+        # Ensure output directory exists
+        raw_dir = Path("data/raw/current")
+        raw_dir.mkdir(parents=True, exist_ok=True)
 
         # Determine allowed domains from seed URLs
         allowed_domains = {_get_domain(u) for u in seed_urls}
@@ -163,6 +169,15 @@ class RecursiveCrawler:
             if not html or len(html) < 500:
                 logger.warning("Empty or too small page: %s", url)
                 continue
+
+            # Save HTML snapshot
+            safe_filename = re.sub(r"[^a-z0-9]", "_", url.lower())[:100] + ".html"
+            save_path = raw_dir / safe_filename
+            try:
+                save_path.write_text(html, encoding="utf-8")
+                logger.debug("Saved HTML snapshot to %s", save_path)
+            except Exception as e:
+                logger.warning("Failed to save HTML snapshot for %s: %s", url, e)
 
             # Extract links for discovery
             raw_links = _extract_links(html, url)

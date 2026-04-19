@@ -31,7 +31,10 @@ class Settings(BaseSettings):
     # --- API keys ---
     anthropic_api_key: str = Field(default="")
     openai_api_key: str = Field(default="")
-    google_api_key: str = Field(default="")
+    google_api_key: str = Field(
+        default="",
+        validation_alias="GEMINI_API_KEY",
+    )
 
     # --- Ollama (local) ---
     ollama_base_url: str = Field(default="http://localhost:11434")

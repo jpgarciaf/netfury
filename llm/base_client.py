@@ -42,3 +42,20 @@ class BaseLLMClient(ABC):
             LLMResponse with content, token counts, and model name.
         """
         ...
+
+    @abstractmethod
+    def extract_from_text(
+        self,
+        text: str,
+        prompt: str,
+    ) -> LLMResponse:
+        """Send text (e.g. HTML diff) to the LLM and get the raw text response.
+
+        Args:
+            text: Input text content.
+            prompt: The extraction prompt with schema instructions.
+
+        Returns:
+            LLMResponse with content, token counts, and model name.
+        """
+        ...

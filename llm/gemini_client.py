@@ -50,3 +50,30 @@ class GeminiClient(BaseLLMClient):
             output_tokens=usage.candidates_token_count if usage else 0,
             model=self.model,
         )
+
+    def extract_from_text(
+        self,
+        text: str,
+        prompt: str,
+    ) -> LLMResponse:
+        """Send text to Gemini and get extraction response.
+
+        Args:
+            text: Input text content.
+            prompt: Structured extraction prompt.
+
+        Returns:
+            LLMResponse with extracted text and token usage.
+        """
+        response = self._client.models.generate_content(
+            model=self.model,
+            contents=[prompt, text],
+        )
+
+        usage = response.usage_metadata
+        return LLMResponse(
+            content=response.text or "",
+            input_tokens=usage.prompt_token_count if usage else 0,
+            output_tokens=usage.candidates_token_count if usage else 0,
+            model=self.model,
+        )

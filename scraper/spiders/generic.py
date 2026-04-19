@@ -65,7 +65,7 @@ class GenericSpider(BaseSpider):
 
     def scrape_with_screenshot(
         self,
-        output_dir: str = "data/raw",
+        output_dir: str = "data/raw/current",
     ) -> ScrapedPage:
         """Scrape HTML and take a screenshot.
 

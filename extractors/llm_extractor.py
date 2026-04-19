@@ -155,3 +155,83 @@ def extract_plans_from_image(
             image_path=image_path,
         )
         return [], [str(e)]
+
+
+def extract_plans_from_diff(
+    diff_text: str,
+    isp_key: str,
+    marca: str,
+    model: str,
+) -> tuple[list[PlanISP], list[str]]:
+    """Extract ISP plans from an HTML diff using an LLM.
+
+    Args:
+        diff_text: Unified diff of HTML content.
+        isp_key: ISP identifier.
+        marca: Brand name.
+        model: LLM model to use.
+
+    Returns:
+        Tuple of (valid PlanISP list, error messages).
+    """
+    from extractors.prompt_templates import build_diff_extraction_prompt
+
+    tracker = CostTracker()
+    client = get_client(model)
+    prompt = build_diff_extraction_prompt(isp_key, marca)
+    now = datetime.now()
+
+    start_ms = int(time.time() * 1000)
+    try:
+        response = client.extract_from_text(diff_text, prompt)
+        latency_ms = int(time.time() * 1000) - start_ms
+
+        raw_plans = parse_llm_response(response.content)
+        plans, errors = validate_and_build_plans(raw_plans, isp_key, now)
+
+        # Compute average field coverage
+        avg_fields = 0
+        if plans:
+            avg_fields = sum(
+                count_non_null_fields(p) for p in plans
+            ) // len(plans)
+
+        tracker.record(
+            provider=client.provider,
+            model=model,
+            isp=isp_key,
+            image_size_bytes=0,  # No image for text extraction
+            input_tokens=response.input_tokens,
+            output_tokens=response.output_tokens,
+            latency_ms=latency_ms,
+            extraction_success=len(plans) > 0,
+            fields_extracted=avg_fields,
+            fields_total=len(PlanISP.model_fields),
+            plans_extracted=len(plans),
+        )
+
+        logger.info(
+            "Diff-extracted %d plans from %s using %s (%.1fs, $%.6f)",
+            len(plans), isp_key, model,
+            latency_ms / 1000, tracker.records[-1].cost_usd,
+        )
+        return plans, errors
+
+    except Exception as e:
+        latency_ms = int(time.time() * 1000) - start_ms
+        logger.error("LLM diff extraction failed for %s: %s", isp_key, e)
+
+        tracker.record(
+            provider=client.provider,
+            model=model,
+            isp=isp_key,
+            image_size_bytes=0,
+            input_tokens=0,
+            output_tokens=0,
+            latency_ms=latency_ms,
+            extraction_success=False,
+            fields_extracted=0,
+            fields_total=len(PlanISP.model_fields),
+            plans_extracted=0,
+        )
+        return [], [str(e)]

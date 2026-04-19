@@ -46,6 +46,14 @@ def main() -> None:
     elif command == "evaluate":
         from pipeline.evaluator import main as run_evaluator
         run_evaluator()
+    elif command == "daily-worker":
+        from pipeline.daily_worker import run_daily_worker
+        import argparse
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--isp", type=str)
+        parser.add_argument("--model", type=str)
+        args, _ = parser.parse_known_args()
+        run_daily_worker(isp_keys=[args.isp] if args.isp else None, model=args.model)
     else:
         print(f"Unknown command: {command}")
         print("Use 'pipeline' or 'evaluate'")

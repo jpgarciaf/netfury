@@ -66,3 +66,28 @@ class OpenAIClient(BaseLLMClient):
             output_tokens=usage.completion_tokens if usage else 0,
             model=self.model,
         )
+
+    def extract_from_text(
+        self,
+        text: str,
+        prompt: str,
+    ) -> LLMResponse:
+        """Send text to GPT-4o and get extraction response."""
+        response = self._client.chat.completions.create(
+            model=self.model,
+            max_tokens=4096,
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"{prompt}\n\n{text}",
+                },
+            ],
+        )
+
+        usage = response.usage
+        return LLMResponse(
+            content=response.choices[0].message.content or "",
+            input_tokens=usage.prompt_tokens if usage else 0,
+            output_tokens=usage.completion_tokens if usage else 0,
+            model=self.model,
+        )

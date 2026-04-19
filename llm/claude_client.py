@@ -66,3 +66,27 @@ class ClaudeClient(BaseLLMClient):
             output_tokens=message.usage.output_tokens,
             model=self.model,
         )
+
+    def extract_from_text(
+        self,
+        text: str,
+        prompt: str,
+    ) -> LLMResponse:
+        """Send text to Claude and get extraction response."""
+        message = self._client.messages.create(
+            model=self.model,
+            max_tokens=4096,
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"{prompt}\n\n{text}",
+                },
+            ],
+        )
+
+        return LLMResponse(
+            content=message.content[0].text,
+            input_tokens=message.usage.input_tokens,
+            output_tokens=message.usage.output_tokens,
+            model=self.model,
+        )
