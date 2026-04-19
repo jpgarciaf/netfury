@@ -1,60 +1,46 @@
 {
-  "extraction_date": "2026-04-19T13:16:07.387730",
-  "strategy": "recursive_full_html_plus_images",
+  "extraction_date": "2026-04-19T13:03:55.534599",
+  "strategy": "recursive_full_html",
   "seed_strategy": "homepage_only",
   "crawl_depth": 1,
-  "max_pages_per_isp": 3,
-  "max_images_per_isp": 5,
+  "max_pages_per_isp": 8,
   "total_plans": 17,
   "total_isps_processed": 8,
-  "isps_with_data": 5,
-  "budget": {
-    "calls_used": 25,
-    "calls_remaining": null,
-    "tokens_used": 0,
-    "tokens_remaining": null,
-    "cost_used_usd": 0.0,
-    "cost_remaining_usd": null
-  },
+  "isps_with_data": 4,
   "details": [
     {
       "isp": "netlife",
       "seed_url": "https://www.netlife.ec",
       "plans_extracted": 0,
-      "pages_crawled": 3,
-      "images_analyzed": 0,
+      "pages_crawled": 6,
       "status": "no_data"
     },
     {
       "isp": "ecuanet",
       "seed_url": "https://www.ecuanet.ec",
-      "plans_extracted": 4,
+      "plans_extracted": 0,
       "pages_crawled": 1,
-      "images_analyzed": 5,
-      "status": "ok"
+      "status": "no_data"
     },
     {
       "isp": "claro",
       "seed_url": "https://www.claro.com.ec",
       "plans_extracted": 7,
       "pages_crawled": 3,
-      "images_analyzed": 5,
       "status": "ok"
     },
     {
       "isp": "cnt",
       "seed_url": "https://www.cnt.gob.ec",
       "plans_extracted": 0,
-      "pages_crawled": 1,
-      "images_analyzed": 0,
+      "pages_crawled": 2,
       "status": "no_data"
     },
     {
       "isp": "xtrim",
       "seed_url": "https://www.xtrim.com.ec",
       "plans_extracted": 4,
-      "pages_crawled": 3,
-      "images_analyzed": 5,
+      "pages_crawled": 6,
       "status": "ok"
     },
     {
@@ -62,15 +48,13 @@
       "seed_url": "https://www.celerity.ec",
       "plans_extracted": 0,
       "pages_crawled": 1,
-      "images_analyzed": 0,
       "status": "no_data"
     },
     {
       "isp": "alfanet",
       "seed_url": "https://www.alfanet.ec",
-      "plans_extracted": 1,
-      "pages_crawled": 3,
-      "images_analyzed": 5,
+      "plans_extracted": 5,
+      "pages_crawled": 8,
       "status": "ok"
     },
     {
@@ -78,7 +62,6 @@
       "seed_url": "https://www.fibramax.ec",
       "plans_extracted": 1,
       "pages_crawled": 1,
-      "images_analyzed": 5,
       "status": "ok"
     }
   ]

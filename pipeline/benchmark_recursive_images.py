@@ -4,8 +4,13 @@ Starts from each ISP homepage, discovers relevant pages recursively using the
 semantic crawler, extracts plans from rendered HTML, then discovers relevant
 images on those pages and runs vision extraction on them.
 
+Supports two image analysis modes:
+  - ocr: Free local OCR (Tesseract/EasyOCR) — zero cost, lower accuracy.
+  - llm: LLM vision API (e.g. GPT-4o) — higher accuracy, costs money.
+
 Usage:
     uv run python main.py benchmark-recursive-images --isp alfanet
+    uv run python main.py benchmark-recursive-images --isp alfanet --mode llm
     uv run python main.py benchmark-recursive-images --isp alfanet --crawl-depth 2
 """
 
@@ -18,9 +23,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from extractors.image_extractor import extract_plans_from_individual_images
 from extractors.full_html_extractor import extract_plans_full_html
-from llm.budget import Budget, BudgetManager
+from extractors.image_extractor import extract_plans_from_individual_images
+from extractors.ocr_extractor import extract_plans_with_ocr
 from pipeline.parquet_writer import plans_to_dataframe, write_parquet
 from schemas.plan import PlanISP
 from scraper.crawler import CrawlConfig, RecursiveCrawler
@@ -79,12 +84,17 @@ def run_recursive_images_isp(
     crawl_depth: int,
     max_pages: int,
     max_images: int,
+    mode: str = "ocr",
+    engine: str = "tesseract",
     model: str | None = None,
-    budget: BudgetManager | None = None,
 ) -> tuple[list[PlanISP], dict]:
-    """Run recursive HTML + image extraction for a single ISP homepage."""
-    cfg = get_settings()
-    model = model or cfg.llm_model
+    """Run recursive HTML + image extraction for a single ISP homepage.
+
+    Args:
+        mode: "ocr" for local OCR (free) or "llm" for LLM vision API.
+        engine: OCR engine when mode=ocr ("tesseract" or "easyocr").
+        model: LLM model when mode=llm (defaults to settings llm_model).
+    """
     marca = isp_key.capitalize() if isp_key != "cnt" else "CNT"
     seed_url = ISP_URLS.get(isp_key, "")
     if not seed_url:
@@ -148,14 +158,25 @@ def run_recursive_images_isp(
 
     image_plans: list[PlanISP] = []
     image_errors: list[str] = []
-    if unique_images and (budget is None or budget.can_call()):
-        image_plans, image_errors = extract_plans_from_individual_images(
-            unique_images,
-            isp_key,
-            marca,
-            model,
-            budget=budget,
-        )
+    if unique_images:
+        if mode == "llm":
+            llm_model = model or get_settings().llm_model
+            image_plans, image_errors = extract_plans_from_individual_images(
+                unique_images,
+                isp_key,
+                marca,
+                llm_model,
+            )
+        else:
+            for image in unique_images:
+                plans, errors = extract_plans_with_ocr(
+                    image.image_bytes,
+                    isp_key,
+                    engine=engine,
+                    image_path=image.url,
+                )
+                image_plans.extend(plans)
+                image_errors.extend(errors)
 
     all_plans = _deduplicate_plans(html_plans + image_plans)
     logger.info(
@@ -184,10 +205,9 @@ def run_benchmark_recursive_images(
     crawl_depth: int = 2,
     max_pages: int | None = None,
     max_images: int = 10,
+    mode: str = "ocr",
+    engine: str = "tesseract",
     model: str | None = None,
-    max_llm_calls: int | None = None,
-    max_tokens: int | None = None,
-    max_cost_usd: float | None = None,
 ) -> list[PlanISP]:
     """Run the recursive HTML + image benchmark for one or more ISPs."""
     targets = isps or BENCHMARK_ISPS
@@ -199,20 +219,18 @@ def run_benchmark_recursive_images(
     summary: list[dict] = []
     crawl_trace: dict[str, dict] = {}
     pages_budget = max_pages or _default_max_pages(crawl_depth)
-    budget = BudgetManager(Budget(
-        max_llm_calls=max_llm_calls,
-        max_tokens=max_tokens,
-        max_cost_usd=max_cost_usd,
-    ))
+
+    mode_label = f"LLM ({model or get_settings().llm_model})" if mode == "llm" else f"OCR ({engine})"
+    cost_label = "API cost" if mode == "llm" else "FREE"
 
     logger.info("=" * 60)
     logger.info(
-        "BENCHMARK RECURSIVE IMAGES — %d ISP(s) from homepage only",
-        len(targets),
+        "BENCHMARK RECURSIVE IMAGES (%s) — %d ISP(s) from homepage only",
+        mode.upper(), len(targets),
     )
     logger.info(
-        "Crawl depth=%d | max_pages=%d | max_images=%d | seed=homepage_only",
-        crawl_depth, pages_budget, max_images,
+        "Crawl depth=%d | max_pages=%d | max_images=%d | %s | %s",
+        crawl_depth, pages_budget, max_images, mode_label, cost_label,
     )
     logger.info("=" * 60)
 
@@ -223,8 +241,9 @@ def run_benchmark_recursive_images(
                 crawl_depth=crawl_depth,
                 max_pages=pages_budget,
                 max_images=max_images,
+                mode=mode,
+                engine=engine,
                 model=model,
-                budget=budget,
             )
             all_plans.extend(plans)
             summary.append({
@@ -292,7 +311,10 @@ def run_benchmark_recursive_images(
         "total_plans": len(all_plans),
         "total_isps_processed": len(targets),
         "isps_with_data": sum(1 for s in summary if s["status"] == "ok"),
-        "budget": budget.remaining(),
+        "image_mode": mode,
+        "ocr_engine": engine if mode == "ocr" else None,
+        "llm_model": model or (get_settings().llm_model if mode == "llm" else None),
+        "cost": "API cost" if mode == "llm" else "$0 (local OCR)",
         "details": summary,
     }
     summary_path.write_text(
@@ -319,6 +341,7 @@ def run_benchmark_recursive_images(
         )
     print(f"\n  Total: {len(all_plans)} planes")
     print(f"  Crawl depth: {crawl_depth} | Max pages/ISP: {pages_budget} | Max images/ISP: {max_images}")
+    print(f"  Image mode: {mode_label} ({cost_label})")
     print(f"  Files: {out}/benchmark_recursive_images_*")
     print("=" * 60)
 
@@ -336,10 +359,9 @@ def main() -> None:
     parser.add_argument("--crawl-depth", type=int, default=2, help="Max crawl depth (default: 2)")
     parser.add_argument("--max-pages", type=int, default=None, help="Max pages to crawl per ISP")
     parser.add_argument("--max-images", type=int, default=10, help="Max images to analyze per ISP")
-    parser.add_argument("--model", type=str, default=None, help="LLM model override")
-    parser.add_argument("--max-llm-calls", type=int, default=None, help="Budget: max LLM calls")
-    parser.add_argument("--max-tokens", type=int, default=None, help="Budget: max tokens")
-    parser.add_argument("--max-cost", type=float, default=None, help="Budget: max USD cost")
+    parser.add_argument("--mode", type=str, default="ocr", choices=["ocr", "llm"], help="Image analysis mode: ocr (free, local) or llm (API vision)")
+    parser.add_argument("--engine", type=str, default="tesseract", choices=["tesseract", "easyocr"], help="OCR engine when --mode=ocr (default: tesseract)")
+    parser.add_argument("--model", type=str, default=None, help="LLM model when --mode=llm (default: from settings)")
     parser.add_argument("--output", type=str, default="data/processed", help="Output directory")
     args = parser.parse_args()
 
@@ -350,10 +372,9 @@ def main() -> None:
         crawl_depth=args.crawl_depth,
         max_pages=args.max_pages,
         max_images=args.max_images,
+        mode=args.mode,
+        engine=args.engine,
         model=args.model,
-        max_llm_calls=args.max_llm_calls,
-        max_tokens=args.max_tokens,
-        max_cost_usd=args.max_cost,
     )
 
 

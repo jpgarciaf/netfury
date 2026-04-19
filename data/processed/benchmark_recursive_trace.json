@@ -1,0 +1,294 @@
+{
+  "netlife": {
+    "seed_url": "https://www.netlife.ec",
+    "pages": [
+      {
+        "url": "https://www.netlife.ec",
+        "depth": 0,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": [
+          "https://www.netlife.ec/planes-hogar/",
+          "https://www.netlife.ec/servicios-digitales/",
+          "https://www.netlife.ec/que-es-netlife-internet-inteligente/",
+          "https://www.netlife.ec/docs/",
+          "https://www.netlife.ec/politica-tratamiento-datos-personales/"
+        ]
+      },
+      {
+        "url": "https://www.netlife.ec/planes-hogar/",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": [
+          "https://www.netlife.ec/planes-recomendados/"
+        ]
+      },
+      {
+        "url": "https://www.netlife.ec/servicios-digitales/",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.netlife.ec/que-es-netlife-internet-inteligente/",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.netlife.ec/docs/",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.netlife.ec/politica-tratamiento-datos-personales/",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      }
+    ]
+  },
+  "ecuanet": {
+    "seed_url": "https://www.ecuanet.ec",
+    "pages": [
+      {
+        "url": "https://www.ecuanet.ec",
+        "depth": 0,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      }
+    ]
+  },
+  "claro": {
+    "seed_url": "https://www.claro.com.ec",
+    "pages": [
+      {
+        "url": "https://www.claro.com.ec",
+        "depth": 0,
+        "plans_extracted": 3,
+        "errors": [],
+        "discovered_urls": [
+          "https://catalogo.claro.com.ec/personas/servicios-hogar/full-claro/",
+          "https://catalogo.claro.com.ec/personas/servicios-hogar/catalogo/"
+        ]
+      },
+      {
+        "url": "https://catalogo.claro.com.ec/personas/servicios-hogar/full-claro/",
+        "depth": 1,
+        "plans_extracted": 1,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://catalogo.claro.com.ec/personas/servicios-hogar/catalogo/",
+        "depth": 1,
+        "plans_extracted": 4,
+        "errors": [],
+        "discovered_urls": [
+          "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-internet-300-mbps-sin-limites-ecdf-gpon-c-abr25",
+          "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-internet-550-mbps-sin-limites-mesh-gpon-c-abr25",
+          "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-internet-550-mbps-sin-limites-mesh-gpon-c-abr25",
+          "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-elite-pro-850-mbps-gpon-nov25",
+          "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-master-plus-1-gbps-nov25",
+          "https://catalogo.claro.com.ec/personas/",
+          "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-elite-pro-850-mbps-gpon-nov25"
+        ]
+      }
+    ]
+  },
+  "cnt": {
+    "seed_url": "https://www.cnt.gob.ec",
+    "pages": [
+      {
+        "url": "https://www.cnt.gob.ec",
+        "depth": 0,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": [
+          "https://gis.cnt.gob.ec/appgeoportal/"
+        ]
+      },
+      {
+        "url": "https://gis.cnt.gob.ec/appgeoportal/",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      }
+    ]
+  },
+  "xtrim": {
+    "seed_url": "https://www.xtrim.com.ec",
+    "pages": [
+      {
+        "url": "https://www.xtrim.com.ec",
+        "depth": 0,
+        "plans_extracted": 4,
+        "errors": [],
+        "discovered_urls": [
+          "https://www.xtrim.com.ec/internet",
+          "https://www.xtrim.com.ec/contactanos",
+          "https://www.xtrim.com.ec/checkout?utm_source=sitio_publico&utm_medium=sitio_publico&utm_campaign=autmatico&utm_content=automatico&utm_term=boton_menu",
+          "https://www.xtrim.com.ec/internet?utm_source=organic&utm_medium=sitio_publico&utm_campaign=nueva_oferta_abril&utm_content=tab_ofertas&utm_term=",
+          "https://www.xtrim.com.ec/consumo-de-internet/"
+        ]
+      },
+      {
+        "url": "https://www.xtrim.com.ec/internet",
+        "depth": 1,
+        "plans_extracted": 3,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.xtrim.com.ec/contactanos",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": [
+          "https://www.xtrim.com.ec/zapping-2/",
+          "https://www.xtrim.com.ec/canales-de-atencion/",
+          "https://autoservicio.xtrim.com.ec/autenticacion/iniciar-sesion",
+          "https://pagos.xtrim.com.ec/",
+          "https://pagos.xtrim.com.ec/"
+        ]
+      },
+      {
+        "url": "https://www.xtrim.com.ec/checkout?utm_source=sitio_publico&utm_medium=sitio_publico&utm_campaign=autmatico&utm_content=automatico&utm_term=boton_menu",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.xtrim.com.ec/internet?utm_source=organic&utm_medium=sitio_publico&utm_campaign=nueva_oferta_abril&utm_content=tab_ofertas&utm_term=",
+        "depth": 1,
+        "plans_extracted": 3,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.xtrim.com.ec/consumo-de-internet/",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": [
+          "https://www.xtrim.com.ec/zapping-2/",
+          "https://www.xtrim.com.ec/canales-de-atencion/",
+          "https://autoservicio.xtrim.com.ec/autenticacion/iniciar-sesion",
+          "https://pagos.xtrim.com.ec/",
+          "https://pagos.xtrim.com.ec/"
+        ]
+      }
+    ]
+  },
+  "puntonet": {
+    "seed_url": "https://www.celerity.ec",
+    "pages": [
+      {
+        "url": "https://www.celerity.ec",
+        "depth": 0,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      }
+    ]
+  },
+  "alfanet": {
+    "seed_url": "https://www.alfanet.ec",
+    "pages": [
+      {
+        "url": "https://www.alfanet.ec",
+        "depth": 0,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": [
+          "https://www.alfanet.ec/internet-corporativo",
+          "https://www.alfanet.ec/planeshogar",
+          "https://www.alfanet.ec/gamers",
+          "https://www.alfanet.ec/mi-negocio#scrollTop=0",
+          "https://www.alfanet.ec/beneficios",
+          "https://www.alfanet.ec/contacto",
+          "https://www.alfanet.ec/shop/cart",
+          "https://www.alfanet.ec/web/login",
+          "https://www.alfanet.ec/nuestra-capacidad-de-internet-1",
+          "https://www.alfanet.ec/guia-parental",
+          "https://www.alfanet.ec/ley-organica-de-discapacidades-lod",
+          "https://www.alfanet.ec/ley-organica-de-las-personas-adultas-mayores-lopam",
+          "https://www.alfanet.ec/politica-de-proteccion-de-datos",
+          "https://www.alfanet.ec/shop"
+        ]
+      },
+      {
+        "url": "https://www.alfanet.ec/internet-corporativo",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.alfanet.ec/planeshogar",
+        "depth": 1,
+        "plans_extracted": 1,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.alfanet.ec/gamers",
+        "depth": 1,
+        "plans_extracted": 1,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.alfanet.ec/mi-negocio#scrollTop=0",
+        "depth": 1,
+        "plans_extracted": 3,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.alfanet.ec/beneficios",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": [
+          "https://www.alfanet.ec/alfamesh"
+        ]
+      },
+      {
+        "url": "https://www.alfanet.ec/contacto",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      },
+      {
+        "url": "https://www.alfanet.ec/shop/cart",
+        "depth": 1,
+        "plans_extracted": 0,
+        "errors": [],
+        "discovered_urls": []
+      }
+    ]
+  },
+  "fibramax": {
+    "seed_url": "https://www.fibramax.ec",
+    "pages": [
+      {
+        "url": "https://www.fibramax.ec",
+        "depth": 0,
+        "plans_extracted": 1,
+        "errors": [],
+        "discovered_urls": []
+      }
+    ]
+  }
+}

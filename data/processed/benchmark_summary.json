@@ -1,12 +1,12 @@
 {
-  "extraction_date": "2026-04-19T09:17:39.017718",
+  "extraction_date": "2026-04-19T13:52:59.750909",
   "strategy": "full_html",
-  "total_plans": 28,
+  "total_plans": 18,
   "total_isps_processed": 8,
-  "isps_with_data": 6,
-  "avg_fields_filled": 16.6,
+  "isps_with_data": 4,
+  "avg_fields_filled": 17.4,
   "total_possible_fields": 30,
-  "field_coverage_pct": 55.4,
+  "field_coverage_pct": 58.0,
   "details": [
     {
       "isp": "netlife",
@@ -34,9 +34,9 @@
     },
     {
       "isp": "xtrim",
-      "plans_extracted": 9,
+      "plans_extracted": 0,
       "errors": 0,
-      "status": "ok"
+      "status": "no_data"
     },
     {
       "isp": "puntonet",
@@ -52,9 +52,9 @@
     },
     {
       "isp": "fibramax",
-      "plans_extracted": 1,
+      "plans_extracted": 0,
       "errors": 0,
-      "status": "ok"
+      "status": "no_data"
     }
   ]
 }
