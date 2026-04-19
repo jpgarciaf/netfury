@@ -1,0 +1,6 @@
+﻿fecha,anio,mes,dia,empresa,marca,nombre_plan,velocidad_download_mbps,velocidad_upload_mbps,precio_plan,precio_plan_tarjeta,precio_plan_debito,precio_plan_efectivo,precio_plan_descuento,descuento,meses_descuento,costo_instalacion,comparticion,pys_adicionales,pys_adicionales_detalle,meses_contrato,facturas_gratis,tecnologia,sectores,parroquia,canton,provincia,factura_anterior,terminos_condiciones,beneficios_publicitados
+2026-04-19 12:35:42.333406,2026,4,19,ALFANET S.A.,Alfanet,Plan Hogar | Alfanet,1200.0,,21.74,,,,,,,,,0,{},,,fibra_optica,[],[],[],[],,,
+2026-04-19 12:35:42.375082,2026,4,19,ALFANET S.A.,Alfanet,Planes Hogar,1200.0,,26.09,,,,,,,,,0,{},,,fibra_optica,[],[],[],[],,,
+2026-04-19 12:35:58.330326,2026,4,19,ALFANET S.A.,Alfanet,Planes Hogar,500.0,,22.17,,,,,,,,,0,{},,,fibra_optica,[],[],[],[],,,
+2026-04-19 12:35:58.330326,2026,4,19,ALFANET S.A.,Alfanet,Planes Gamer,700.0,,26.09,,,,,,,,,0,{},,,fibra_optica,[],[],[],[],,,
+2026-04-19 12:35:58.330326,2026,4,19,ALFANET S.A.,Alfanet,Planes Mi Negocio,1000.0,,32.17,,,,,,,,,0,{},,,fibra_optica,[],[],[],[],,,

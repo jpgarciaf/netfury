@@ -1,0 +1,29 @@
+{
+  "extraction_date": "2026-04-19T12:27:53.772380",
+  "strategy": "recursive_full_html_plus_images",
+  "seed_strategy": "homepage_only",
+  "crawl_depth": 1,
+  "max_pages_per_isp": 8,
+  "max_images_per_isp": 5,
+  "total_plans": 5,
+  "total_isps_processed": 1,
+  "isps_with_data": 1,
+  "budget": {
+    "calls_used": 5,
+    "calls_remaining": null,
+    "tokens_used": 0,
+    "tokens_remaining": null,
+    "cost_used_usd": 0.0,
+    "cost_remaining_usd": null
+  },
+  "details": [
+    {
+      "isp": "alfanet",
+      "seed_url": "https://www.alfanet.ec",
+      "plans_extracted": 5,
+      "pages_crawled": 8,
+      "images_analyzed": 5,
+      "status": "ok"
+    }
+  ]
+}

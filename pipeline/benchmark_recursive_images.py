@@ -70,7 +70,7 @@ def _serialize_df_for_csv(df) -> None:
 
 
 def _default_max_pages(crawl_depth: int) -> int:
-    return max(8, crawl_depth * 5)
+    return max(3, crawl_depth * 3)
 
 
 def run_recursive_images_isp(
@@ -94,6 +94,8 @@ def run_recursive_images_isp(
     crawl_config = CrawlConfig(
         max_depth=crawl_depth,
         max_pages=max_pages,
+        wait_ms=3000,
+        min_relevance_score=5.0,
     )
     crawler = RecursiveCrawler(crawl_config)
     crawl_results = crawler.crawl([seed_url])

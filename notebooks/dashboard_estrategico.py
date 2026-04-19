@@ -327,55 +327,39 @@ def chart_mapa_ecuador(market_data: list[dict]) -> None:
 
     prov_df = netlife.merge(leaders, on="province", how="left")
 
-    # Load Ecuador GeoJSON
+    # Load Ecuador GeoJSON (GADM 4.1 — has valid geometry for all provinces)
     try:
         geo = gpd.read_file(
-            "https://raw.githubusercontent.com/pabl-o-ce/Ecuador-geoJSON/"
-            "master/geojson/provinces.geojson",
+            "https://geodata.ucdavis.edu/gadm/gadm4.1/json/gadm41_ECU_1.json",
         )
     except Exception:
         print("  [SKIP] Could not load Ecuador GeoJSON")
         return
 
-    # Normalize province names for matching
-    name_col = None
-    for col in ["province", "DPA_DESPRO", "PROVINCIA", "name", "NAME_1", "provincia"]:
-        if col in geo.columns:
-            name_col = col
-            break
+    geo = geo.rename(columns={"NAME_1": "geo_province"})
 
-    if name_col is None:
-        for col in geo.columns:
-            if col != "geometry" and geo[col].dtype == "object":
-                name_col = col
-                break
-
-    if name_col is None:
-        print(f"  [SKIP] Could not find province name column. Cols: {geo.columns.tolist()}")
-        return
-
-    # Rename geo province column to avoid collision with market data
-    geo = geo.rename(columns={name_col: "geo_province"})
-    name_col = "geo_province"
-
-    # Normalize names
+    # Normalize names — GADM joins multi-word names (e.g. "ElOro", "LosRios")
     import unicodedata
+    import re
 
     def normalize(s):
         if not isinstance(s, str):
             return ""
         s = unicodedata.normalize("NFD", s)
         s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+        # Insert space before uppercase letters to split GADM names
+        s = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", s)
         return s.lower().strip()
 
     geo["_norm"] = geo["geo_province"].apply(normalize)
     prov_df["_norm"] = prov_df["province"].apply(normalize)
 
-    # Manual corrections
+    # Align GADM names → JSON names
     name_map = {
-        "santo domingo": "santo domingo de los tsachilas",
-        "galapagos": "galapagos",
+        "santo domingodelos tsachilas": "santo domingo",
+        "santo domingo de los tsachilas": "santo domingo",
     }
+    geo["_norm"] = geo["_norm"].replace(name_map)
     prov_df["_norm"] = prov_df["_norm"].replace(name_map)
 
     geo = geo.merge(prov_df, on="_norm", how="left")

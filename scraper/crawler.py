@@ -273,104 +273,125 @@ class RecursiveCrawler:
     def crawl(self, seed_urls: list[str]) -> list[CrawlResult]:
         """Crawl starting from seed URLs using BFS.
 
+        Uses a single Playwright browser instance for all pages to avoid
+        the overhead of launching a new browser per page (~2-3s each).
+
         Args:
             seed_urls: Initial URLs to start crawling from.
 
         Returns:
             List of CrawlResult for each visited page.
         """
-        from extractors.full_html_extractor import _get_rendered_html
+        from playwright.sync_api import sync_playwright
 
         cfg = self._config
         results: list[CrawlResult] = []
         queue: deque[tuple[str, int]] = deque()
         self._visited.clear()
 
-        # Determine allowed domains from seed URLs
         allowed_domains = {_get_site_key(u) for u in seed_urls}
 
-        # Seed the queue
         for url in seed_urls:
             norm = _normalize_url(url)
             if norm not in self._visited:
                 self._visited.add(norm)
                 queue.append((url, 0))
 
-        while queue and len(results) < cfg.max_pages:
-            url, depth = queue.popleft()
+        settings = get_settings()
 
-            logger.info(
-                "Crawling [depth=%d/%d, pages=%d/%d]: %s",
-                depth, cfg.max_depth, len(results) + 1, cfg.max_pages, url,
+        with sync_playwright() as p:
+            browser = p.chromium.launch(
+                headless=True,
+                args=[
+                    "--ignore-certificate-errors",
+                    "--disable-blink-features=AutomationControlled",
+                ],
+            )
+            context = browser.new_context(
+                viewport={
+                    "width": settings.screenshot_width,
+                    "height": settings.screenshot_height,
+                },
+                user_agent=(
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) "
+                    "AppleWebKit/605.1.15 (KHTML, like Gecko) "
+                    "Version/18.0 Safari/605.1.15"
+                ),
             )
 
-            # Fetch rendered HTML
-            try:
-                html = _get_rendered_html(url, wait_ms=cfg.wait_ms)
-            except Exception as e:
-                logger.warning("Failed to crawl %s: %s", url, e)
-                continue
+            while queue and len(results) < cfg.max_pages:
+                url, depth = queue.popleft()
 
-            if not html or len(html) < 500:
-                logger.warning("Empty or too small page: %s", url)
-                continue
+                logger.info(
+                    "Crawling [depth=%d/%d, pages=%d/%d]: %s",
+                    depth, cfg.max_depth, len(results) + 1, cfg.max_pages, url,
+                )
 
-            # Extract links for discovery
-            raw_links = sorted(
-                _extract_links(html, url),
-                key=lambda candidate: candidate.score,
-                reverse=True,
-            )
-            discovered: list[str] = []
-
-            for candidate in raw_links:
-                link = candidate.url
-                norm_link = _normalize_url(link)
-
-                # Skip already visited
-                if norm_link in self._visited:
+                # Fetch rendered HTML using shared browser
+                try:
+                    html = self._render_page(context, url, cfg.wait_ms)
+                except Exception as e:
+                    logger.warning("Failed to crawl %s: %s", url, e)
                     continue
 
-                # Domain filter
-                if cfg.same_domain_only:
-                    link_domain = _get_site_key(link)
-                    if link_domain not in allowed_domains:
+                if not html or len(html) < 500:
+                    logger.warning("Empty or too small page: %s", url)
+                    continue
+
+                # Extract links for discovery
+                raw_links = sorted(
+                    _extract_links(html, url),
+                    key=lambda candidate: candidate.score,
+                    reverse=True,
+                )
+                discovered: list[str] = []
+
+                for candidate in raw_links:
+                    link = candidate.url
+                    norm_link = _normalize_url(link)
+
+                    if norm_link in self._visited:
                         continue
 
-                # Keyword relevance filter
-                link_text = " ".join((
-                    candidate.url,
-                    candidate.anchor_text,
-                    candidate.context_text,
+                    if cfg.same_domain_only:
+                        link_domain = _get_site_key(link)
+                        if link_domain not in allowed_domains:
+                            continue
+
+                    link_text = " ".join((
+                        candidate.url,
+                        candidate.anchor_text,
+                        candidate.context_text,
+                    ))
+                    if cfg.url_pattern and not cfg.url_pattern.search(link_text):
+                        continue
+
+                    if candidate.score < cfg.min_relevance_score:
+                        continue
+
+                    discovered.append(link)
+
+                    if depth + 1 <= cfg.max_depth:
+                        self._visited.add(norm_link)
+                        queue.append((link, depth + 1))
+
+                results.append(CrawlResult(
+                    url=url,
+                    html=html,
+                    depth=depth,
+                    discovered_urls=discovered,
                 ))
-                if cfg.url_pattern and not cfg.url_pattern.search(link_text):
-                    continue
 
-                if candidate.score < cfg.min_relevance_score:
-                    continue
+                # Respect delay between requests
+                import random
+                delay = random.uniform(
+                    settings.scrape_delay_min, settings.scrape_delay_max,
+                )
+                if queue:
+                    time.sleep(delay)
 
-                discovered.append(link)
-
-                # Only enqueue if within depth limit
-                if depth + 1 <= cfg.max_depth:
-                    self._visited.add(norm_link)
-                    queue.append((link, depth + 1))
-
-            results.append(CrawlResult(
-                url=url,
-                html=html,
-                depth=depth,
-                discovered_urls=discovered,
-            ))
-
-            # Respect delay between requests
-            settings = get_settings()
-            import random
-            delay = random.uniform(
-                settings.scrape_delay_min, settings.scrape_delay_max,
-            )
-            if queue:  # Only delay if more pages to crawl
-                time.sleep(delay)
+            context.close()
+            browser.close()
 
         logger.info(
             "Crawl complete: %d pages visited, %d total URLs discovered",
@@ -378,3 +399,28 @@ class RecursiveCrawler:
             sum(len(r.discovered_urls) for r in results),
         )
         return results
+
+    @staticmethod
+    def _render_page(context, url: str, wait_ms: int) -> str:
+        """Render a page using a shared browser context.
+
+        Uses a shorter networkidle timeout (30s) with fast fallback
+        to domcontentloaded to avoid wasting 60s on slow sites.
+        """
+        page = context.new_page()
+        try:
+            try:
+                page.goto(url, wait_until="networkidle", timeout=30000)
+            except Exception:
+                page.goto(url, wait_until="domcontentloaded", timeout=30000)
+                page.wait_for_timeout(3000)
+
+            page.wait_for_timeout(wait_ms)
+            page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+            page.wait_for_timeout(1000)
+            page.evaluate("window.scrollTo(0, 0)")
+            page.wait_for_timeout(500)
+            html = page.content()
+        finally:
+            page.close()
+        return html

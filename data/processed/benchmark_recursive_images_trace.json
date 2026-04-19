@@ -1,0 +1,122 @@
+{
+  "alfanet": {
+    "seed_url": "https://www.alfanet.ec",
+    "pages": [
+      {
+        "url": "https://www.alfanet.ec",
+        "depth": 0,
+        "plans_extracted_html": 0,
+        "errors": [],
+        "discovered_urls": [
+          "https://www.alfanet.ec/internet-corporativo",
+          "https://www.alfanet.ec/planeshogar",
+          "https://www.alfanet.ec/gamers",
+          "https://www.alfanet.ec/mi-negocio#scrollTop=0",
+          "https://www.alfanet.ec/beneficios",
+          "https://www.alfanet.ec/contacto",
+          "https://www.alfanet.ec/shop/cart",
+          "https://www.alfanet.ec/web/login",
+          "https://www.alfanet.ec/nuestra-capacidad-de-internet-1",
+          "https://www.alfanet.ec/guia-parental",
+          "https://www.alfanet.ec/ley-organica-de-discapacidades-lod",
+          "https://www.alfanet.ec/ley-organica-de-las-personas-adultas-mayores-lopam",
+          "https://www.alfanet.ec/politica-de-proteccion-de-datos",
+          "https://www.alfanet.ec/shop"
+        ],
+        "images_discovered": 5
+      },
+      {
+        "url": "https://www.alfanet.ec/internet-corporativo",
+        "depth": 1,
+        "plans_extracted_html": 0,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 5
+      },
+      {
+        "url": "https://www.alfanet.ec/planeshogar",
+        "depth": 1,
+        "plans_extracted_html": 1,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 0
+      },
+      {
+        "url": "https://www.alfanet.ec/gamers",
+        "depth": 1,
+        "plans_extracted_html": 1,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 3
+      },
+      {
+        "url": "https://www.alfanet.ec/mi-negocio#scrollTop=0",
+        "depth": 1,
+        "plans_extracted_html": 3,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 0
+      },
+      {
+        "url": "https://www.alfanet.ec/beneficios",
+        "depth": 1,
+        "plans_extracted_html": 0,
+        "errors": [],
+        "discovered_urls": [
+          "https://www.alfanet.ec/alfamesh"
+        ],
+        "images_discovered": 1
+      },
+      {
+        "url": "https://www.alfanet.ec/contacto",
+        "depth": 1,
+        "plans_extracted_html": 0,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 0
+      },
+      {
+        "url": "https://www.alfanet.ec/shop/cart",
+        "depth": 1,
+        "plans_extracted_html": 0,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 0
+      }
+    ],
+    "images": [
+      {
+        "url": "https://www.alfanet.ec/web/image/12878112-be4a4094/Descuento%2C%20Servicios%20y%20Beneficios.png",
+        "context_text": "EL MEJOR INTERNET DE FIBRA ÓPTICA DEL PAÍS",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.alfanet.ec/web/image/15017344-4e746671/Zapping_Chile_2020%20%282%29.png",
+        "context_text": "Navega Fácil 1200 Megas $ 26.09 +IVA 40% de descuento ESCOGE Instalación gratis Mes gratis *Aplica términos y condiciones ¡Conéctame al futuro!",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.alfanet.ec/web/image/15017273-c283b49e/Dise%C3%B1o%20sin%20t%C3%ADtulo%20%2845%29.png",
+        "context_text": "Navega Fácil 1200 Megas $ 26.09 +IVA 40% de descuento ESCOGE Instalación gratis Mes gratis *Aplica términos y condiciones ¡Conéctame al futuro!",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.alfanet.ec/web/image/14393098-7e4f0d21/Mini%20Banner_2.png",
+        "context_text": "",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.alfanet.ec/web/image/9794908-3918491d/Banner%20para%20sitio%20web%201.png",
+        "context_text": "Anterior Siguiente",
+        "alt_text": ""
+      }
+    ],
+    "image_errors": [
+      "Image 1 (https://www.alfanet.ec/web/image/12878112-be4a4094/Descuento%2C%20Servicios%20y%20Beneficios.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDXwrkkP8nQiuSXsyQaM'}",
+      "Image 2 (https://www.alfanet.ec/web/image/15017344-4e746671/Zapping_Chile_2020%20%282%29.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDXwth5iEMhLQ4hvKUci'}",
+      "Image 3 (https://www.alfanet.ec/web/image/15017273-c283b49e/Dise%C3%B1o%20sin%20t%C3%ADtulo%20%2845%29.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDXwvZCdiLeb542LTKGi'}",
+      "Image 4 (https://www.alfanet.ec/web/image/14393098-7e4f0d21/Mini%20Banner_2.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDXwxQaGiPXeTK87FX7F'}",
+      "Image 5 (https://www.alfanet.ec/web/image/9794908-3918491d/Banner%20para%20sitio%20web%201.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDXx3B4aaMtLy51a2DZb'}"
+    ]
+  }
+}
