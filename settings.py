@@ -84,7 +84,7 @@ ISP_URLS: dict[str, str] = {
     "claro": "https://www.claro.com.ec",
     "cnt": "https://www.cnt.gob.ec",
     "xtrim": "https://www.xtrim.com.ec",
-    "puntonet": "https://www.puntonet.ec",
+    "puntonet": "https://www.celerity.ec",
     "alfanet": "https://www.alfanet.ec",
     "fibramax": "https://www.fibramax.ec",
 }
