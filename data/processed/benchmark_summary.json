@@ -1,16 +1,58 @@
 {
-  "extraction_date": "2026-04-18T22:21:42.450288",
+  "extraction_date": "2026-04-19T09:17:39.017718",
   "strategy": "full_html",
-  "total_plans": 9,
-  "total_isps_processed": 1,
-  "isps_with_data": 1,
-  "avg_fields_filled": 15.7,
+  "total_plans": 28,
+  "total_isps_processed": 8,
+  "isps_with_data": 6,
+  "avg_fields_filled": 16.6,
   "total_possible_fields": 30,
-  "field_coverage_pct": 52.2,
+  "field_coverage_pct": 55.4,
   "details": [
+    {
+      "isp": "netlife",
+      "plans_extracted": 10,
+      "errors": 0,
+      "status": "ok"
+    },
+    {
+      "isp": "ecuanet",
+      "plans_extracted": 4,
+      "errors": 0,
+      "status": "ok"
+    },
+    {
+      "isp": "claro",
+      "plans_extracted": 3,
+      "errors": 0,
+      "status": "ok"
+    },
+    {
+      "isp": "cnt",
+      "plans_extracted": 0,
+      "errors": 0,
+      "status": "no_data"
+    },
     {
       "isp": "xtrim",
       "plans_extracted": 9,
+      "errors": 0,
+      "status": "ok"
+    },
+    {
+      "isp": "puntonet",
+      "plans_extracted": 0,
+      "errors": 0,
+      "status": "no_data"
+    },
+    {
+      "isp": "alfanet",
+      "plans_extracted": 1,
+      "errors": 0,
+      "status": "ok"
+    },
+    {
+      "isp": "fibramax",
+      "plans_extracted": 1,
       "errors": 0,
       "status": "ok"
     }

@@ -61,7 +61,14 @@ def _get_rendered_html(url: str, *, wait_ms: int = 8000) -> str:
             ),
         )
         page = context.new_page()
-        page.goto(url, wait_until="networkidle", timeout=60000)
+        try:
+            page.goto(url, wait_until="networkidle", timeout=60000)
+        except Exception:
+            logger.info(
+                "Rendered HTML: networkidle timeout for %s, retrying with domcontentloaded",
+                url,
+            )
+            page.goto(url, wait_until="domcontentloaded", timeout=60000)
         page.wait_for_timeout(wait_ms)
         # Scroll to trigger lazy loading
         page.evaluate("window.scrollTo(0, document.body.scrollHeight)")

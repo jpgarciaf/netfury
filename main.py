@@ -18,6 +18,8 @@ def main() -> None:
         print()
         print("Commands:")
         print("  benchmark-full - Extract ALL ISPs with 30+ fields (enhanced HTML)")
+        print("  benchmark-recursive - Extract from homepage using recursive crawl")
+        print("  benchmark-recursive-images - Recursive crawl plus image analysis")
         print("  benchmark      - Extract ALL ISPs (basic OCR/LLM)")
         print("  pipeline       - Run extraction pipeline for single/all ISPs")
         print("  evaluate       - Run multi-model evaluation")
@@ -25,6 +27,8 @@ def main() -> None:
         print("Examples:")
         print("  uv run python main.py benchmark-full")
         print("  uv run python main.py benchmark-full --isp xtrim")
+        print("  uv run python main.py benchmark-recursive --isp claro --crawl-depth 2")
+        print("  uv run python main.py benchmark-recursive-images --isp alfanet")
         print("  uv run python main.py benchmark-full --cached")
         print("  uv run python main.py benchmark --strategy llm --model gpt-4o")
         print("  uv run python main.py pipeline --isp xtrim --strategy llm")
@@ -37,6 +41,12 @@ def main() -> None:
     if command == "benchmark-full":
         from pipeline.benchmark_full import main as run_benchmark_full
         run_benchmark_full()
+    elif command == "benchmark-recursive":
+        from pipeline.benchmark_recursive import main as run_benchmark_recursive
+        run_benchmark_recursive()
+    elif command == "benchmark-recursive-images":
+        from pipeline.benchmark_recursive_images import main as run_benchmark_recursive_images
+        run_benchmark_recursive_images()
     elif command == "benchmark":
         from pipeline.benchmark import main as run_benchmark
         run_benchmark()
