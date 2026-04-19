@@ -21,7 +21,7 @@
         "discovered_urls": [
           "https://www.netlife.ec/planes-recomendados/"
         ],
-        "images_discovered": 0
+        "images_discovered": 2
       },
       {
         "url": "https://www.netlife.ec/servicios-digitales/",
@@ -30,10 +30,44 @@
         "errors": [],
         "discovered_urls": [],
         "images_discovered": 0
+      },
+      {
+        "url": "https://www.netlife.ec/planes-recomendados/",
+        "depth": 2,
+        "plans_extracted_html": 0,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 2
       }
     ],
-    "images": [],
-    "image_errors": []
+    "images": [
+      {
+        "url": "https://netlife.ec/wp-content/plugins/PlanesNuevosNetlife2023/image/destacado.png",
+        "context_text": "950 Mbps Recibe hasta 1000 Mbps Por 12 meses* Precio Promocional* $22. 05 + Iva Precio Promocional* con IVA $25. 36 30% Dcto. 9 primeras facturas* Forma de pago con Tarjeta de Crédito* Elige en tu pla",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.netlife.ec/wp-content/uploads/2025/01/plan750-1_.webp",
+        "context_text": "Opción 1",
+        "alt_text": ""
+      },
+      {
+        "url": "https://netlife.ec/wp-content/uploads/2026/02/1000-2plan@2x.webp",
+        "context_text": "",
+        "alt_text": ""
+      },
+      {
+        "url": "https://netlife.ec/wp-content/uploads/2026/01/2000plan@2x.webp",
+        "context_text": "",
+        "alt_text": ""
+      }
+    ],
+    "image_errors": [
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text"
+    ]
   },
   "ecuanet": {
     "seed_url": "https://www.ecuanet.ec",
@@ -44,7 +78,7 @@
         "plans_extracted_html": 4,
         "errors": [],
         "discovered_urls": [],
-        "images_discovered": 5
+        "images_discovered": 10
       }
     ],
     "images": [
@@ -72,14 +106,42 @@
         "url": "https://ecuanet.ec/wp-content/uploads/2024/03/homeP1.svg",
         "context_text": "Pequeño",
         "alt_text": "homeP1 Internet del Ecuador"
+      },
+      {
+        "url": "https://ecuanet.ec/wp-content/uploads/2024/03/homeM1.svg",
+        "context_text": "Mediano",
+        "alt_text": "homeM1 Internet del Ecuador"
+      },
+      {
+        "url": "https://ecuanet.ec/wp-content/uploads/2024/03/homeG1.svg",
+        "context_text": "Grande",
+        "alt_text": "homeG1 Internet del Ecuador"
+      },
+      {
+        "url": "https://ecuanet.ec/wp-content/uploads/2024/03/ico-entretenimiento1.svg",
+        "context_text": "Entretenimiento",
+        "alt_text": "ico entretenimiento1 Internet del Ecuador"
+      },
+      {
+        "url": "https://ecuanet.ec/wp-content/uploads/2024/03/ico-gamer1.svg",
+        "context_text": "Juegos",
+        "alt_text": "ico gamer1 Internet del Ecuador"
+      },
+      {
+        "url": "https://ecuanet.ec/wp-content/uploads/2024/03/ico-teletrabajo1.svg",
+        "context_text": "Teletrabajo",
+        "alt_text": "ico teletrabajo1 Internet del Ecuador"
       }
     ],
     "image_errors": [
-      "Image 1 (https://ecuanet.ec/wp-content/uploads/2026/03/bueno-bonito-y-bacan.webp): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbCgEzUPS6nvtioPR9D'}",
-      "Image 2 (https://ecuanet.ec/wp-content/uploads/2026/03/comparitcion-Ecuane.webp): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbCi4PL7D9fMXjC4bnT'}",
-      "Image 3 (https://ecuanet.ec/wp-content/uploads/2026/01/wifiico.webp): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbCjF5J6YyLtzJM8S87'}",
-      "Image 4 (https://ecuanet.ec/wp-content/uploads/2026/01/assist-ecuanet.webp): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbCkRWa8gDM3nUARyh6'}",
-      "Image 5 (https://ecuanet.ec/wp-content/uploads/2024/03/homeP1.svg): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbCmbhuNUoKWdCFPTTU'}"
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text"
     ]
   },
   "claro": {
@@ -94,7 +156,7 @@
           "https://catalogo.claro.com.ec/personas/servicios-hogar/full-claro/",
           "https://catalogo.claro.com.ec/personas/servicios-hogar/catalogo/"
         ],
-        "images_discovered": 5
+        "images_discovered": 10
       },
       {
         "url": "https://catalogo.claro.com.ec/personas/servicios-hogar/full-claro/",
@@ -112,9 +174,38 @@
         "discovered_urls": [
           "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-internet-300-mbps-sin-limites-ecdf-gpon-c-abr25",
           "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-internet-550-mbps-sin-limites-mesh-gpon-c-abr25",
-          "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-internet-550-mbps-sin-limites-mesh-gpon-c-abr25",
           "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-elite-pro-850-mbps-gpon-nov25",
           "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-master-plus-1-gbps-nov25"
+        ],
+        "images_discovered": 0
+      },
+      {
+        "url": "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-internet-300-mbps-sin-limites-ecdf-gpon-c-abr25",
+        "depth": 2,
+        "plans_extracted_html": 14,
+        "errors": [],
+        "discovered_urls": [
+          "https://catalogo.claro.com.ec/personas/"
+        ],
+        "images_discovered": 0
+      },
+      {
+        "url": "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-internet-550-mbps-sin-limites-mesh-gpon-c-abr25",
+        "depth": 2,
+        "plans_extracted_html": 14,
+        "errors": [],
+        "discovered_urls": [
+          "https://catalogo.claro.com.ec/personas/"
+        ],
+        "images_discovered": 0
+      },
+      {
+        "url": "https://catalogo.claro.com.ec/personas/servicios-hogar/ver-mas/hogar-2-play-elite-pro-850-mbps-gpon-nov25",
+        "depth": 2,
+        "plans_extracted_html": 14,
+        "errors": [],
+        "discovered_urls": [
+          "https://catalogo.claro.com.ec/personas/"
         ],
         "images_discovered": 0
       }
@@ -144,14 +235,40 @@
         "url": "https://www.claro.com.ec/portal/ec/recursos_contenido/1743047348547-04-Samsung.png",
         "context_text": "",
         "alt_text": "Alt"
+      },
+      {
+        "url": "https://www.claro.com.ec/portal/ec/recursos_contenido/1771880026635-05-Honor-Magic8Lite.png",
+        "context_text": "",
+        "alt_text": "Alt"
+      },
+      {
+        "url": "https://www.claro.com.ec/portal/ec/recursos_contenido/1729902699095-bg-cBanner-cumplimiento.jpg",
+        "context_text": "",
+        "alt_text": "Alt"
+      },
+      {
+        "url": "https://www.claro.com.ec/portal/ec/recursos_contenido/1764780166162-CLARO_5G_Banner_claro.com.ec__520X600.webp",
+        "context_text": "",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.claro.com.ec/portal/ec/recursos_contenido/1764780166162-CLARO_5G_Banner_claro.com.ec__520X600.png",
+        "context_text": "",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.claro.com.ec/portal/ec/recursos_contenido/1764780157295-CLARO_5G_Banner_claro.com.ec_1540x520.webp",
+        "context_text": "",
+        "alt_text": ""
       }
     ],
     "image_errors": [
-      "Image 1 (https://www.claro.com.ec/portal/ec/recursos_contenido/1764780157295-CLARO_5G_Banner_claro.com.ec_1540x520.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbH5DEBaqk7PnDbnvAq'}",
-      "Image 2 (https://www.claro.com.ec/portal/ec/recursos_contenido/1776263654768-PPO-Redes-Clarocom-1540x480-conboton.jpg): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbH8fbGddH5tFjRjyfv'}",
-      "Image 3 (https://www.claro.com.ec/portal/ec/recursos_contenido/1743177822711-modulo_C62_fondo2_1320x180_HOGAR.jpg): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbH9xUqvZHubD994bcG'}",
-      "Image 4 (https://www.claro.com.ec/portal/ec/recursos_contenido/1743047312632-03-iPhone.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbHBQnd6a9pMXF9jzQw'}",
-      "Image 5 (https://www.claro.com.ec/portal/ec/recursos_contenido/1743047348547-04-Samsung.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbHCs6i41wbKdU3hLxy'}"
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text"
     ]
   },
   "cnt": {
@@ -183,7 +300,7 @@
           "https://www.xtrim.com.ec/checkout?utm_source=sitio_publico&utm_medium=sitio_publico&utm_campaign=autmatico&utm_content=automatico&utm_term=boton_menu",
           "https://www.xtrim.com.ec/internet?utm_source=organic&utm_medium=sitio_publico&utm_campaign=nueva_oferta_abril&utm_content=tab_ofertas&utm_term="
         ],
-        "images_discovered": 5
+        "images_discovered": 6
       },
       {
         "url": "https://www.xtrim.com.ec/internet",
@@ -200,6 +317,22 @@
         "errors": [],
         "discovered_urls": [],
         "images_discovered": 0
+      },
+      {
+        "url": "https://www.xtrim.com.ec/checkout?utm_source=sitio_publico&utm_medium=sitio_publico&utm_campaign=autmatico&utm_content=automatico&utm_term=boton_menu",
+        "depth": 1,
+        "plans_extracted_html": 0,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 0
+      },
+      {
+        "url": "https://www.xtrim.com.ec/internet?utm_source=organic&utm_medium=sitio_publico&utm_campaign=nueva_oferta_abril&utm_content=tab_ofertas&utm_term=",
+        "depth": 1,
+        "plans_extracted_html": 3,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 4
       }
     ],
     "images": [
@@ -227,14 +360,26 @@
         "url": "https://d2v6nu3ery768q.cloudfront.net/assets-admin-xtrim/Futbol_Web_Pop_Up_388x183_4e7cc089a8.webp",
         "context_text": "Tiempo limitado Vive el fútbol con LigaEcuabet y fibra óptica Xtrim desde $28+imp* Contratar plan",
         "alt_text": ""
+      },
+      {
+        "url": "https://d1zbh0zoyx3qgr.cloudfront.net/assets-admin-xtrim/BANNERS_ABRIL_Mesa_de_trabajo_7_dc11da2ff5.webp",
+        "context_text": "Velocidad Xtrimadamente Superior ¡Quiero mi plan Xtrim!",
+        "alt_text": ""
+      },
+      {
+        "url": "https://d1zbh0zoyx3qgr.cloudfront.net/assets-admin-xtrim/Futbol_Landing_Web_Banner_1366x661_cea5a92304.webp",
+        "context_text": "",
+        "alt_text": ""
+      },
+      {
+        "url": "https://d1zbh0zoyx3qgr.cloudfront.net/assets-admin-xtrim/D_Plan_Premium_Aurora_RGB_b5c2ebd38a.png",
+        "context_text": "Contratar ahora Solicitar por WhatsApp",
+        "alt_text": ""
       }
     ],
     "image_errors": [
-      "Image 1 (https://d1zbh0zoyx3qgr.cloudfront.net/assets-admin-xtrim/CONTENEDORES_OFERTA_ABRIL_Mesa_de_trabajo_4_b96b28b185.webp): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbU1EuyVC1PebvYj8Z3'}",
-      "Image 2 (https://d1zbh0zoyx3qgr.cloudfront.net/assets-admin-xtrim/Oferta_General_Web_Pop_Up_388x183_4b0efe2597.webp): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbU2pAn2RKGapp1tHQQ'}",
-      "Image 3 (https://d1zbh0zoyx3qgr.cloudfront.net/assets-admin-xtrim/Futbol_Web_Banner_1366x661_56a8cde150.webp): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbU4fHsyofWW2xudtia'}",
-      "Image 4 (https://d1zbh0zoyx3qgr.cloudfront.net/assets-admin-xtrim/Regreso_Clases_Web_Banner_1366x661_e9b0b31ef8.webp): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbU7PzoQPPLzBvkoczp'}",
-      "Image 5 (https://d2v6nu3ery768q.cloudfront.net/assets-admin-xtrim/Futbol_Web_Pop_Up_388x183_4e7cc089a8.webp): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbU8ZCazF7791JfZ2GA'}"
+      "OCR returned empty text",
+      "OCR returned empty text"
     ]
   },
   "puntonet": {
@@ -270,7 +415,7 @@
           "https://www.alfanet.ec/shop/cart",
           "https://www.alfanet.ec/web/login"
         ],
-        "images_discovered": 5
+        "images_discovered": 8
       },
       {
         "url": "https://www.alfanet.ec/internet-corporativo",
@@ -278,7 +423,7 @@
         "plans_extracted_html": 0,
         "errors": [],
         "discovered_urls": [],
-        "images_discovered": 5
+        "images_discovered": 10
       },
       {
         "url": "https://www.alfanet.ec/planeshogar",
@@ -287,6 +432,30 @@
         "errors": [],
         "discovered_urls": [],
         "images_discovered": 0
+      },
+      {
+        "url": "https://www.alfanet.ec/gamers",
+        "depth": 1,
+        "plans_extracted_html": 1,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 3
+      },
+      {
+        "url": "https://www.alfanet.ec/mi-negocio#scrollTop=0",
+        "depth": 1,
+        "plans_extracted_html": 3,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 0
+      },
+      {
+        "url": "https://www.alfanet.ec/beneficios",
+        "depth": 1,
+        "plans_extracted_html": 0,
+        "errors": [],
+        "discovered_urls": [],
+        "images_discovered": 1
       }
     ],
     "images": [
@@ -314,14 +483,38 @@
         "url": "https://www.alfanet.ec/web/image/9794908-3918491d/Banner%20para%20sitio%20web%201.png",
         "context_text": "Anterior Siguiente",
         "alt_text": ""
+      },
+      {
+        "url": "https://www.alfanet.ec/web/image/9794909-3918491d/Banner%20para%20sitio%20web%201.png",
+        "context_text": "Anterior Siguiente",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.alfanet.ec/web/image/14587272-0b93553e/%231%20EN%20VELOCIDAD%20Y%20SATISFACCI%C3%93N%20DEL%20CLIENTE%20EN%20ECUADOR.jpg",
+        "context_text": "Anterior Siguiente",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.alfanet.ec/web/image/14587271-0b93553e/%231%20EN%20VELOCIDAD%20Y%20SATISFACCI%C3%93N%20DEL%20CLIENTE%20EN%20ECUADOR.jpg",
+        "context_text": "Anterior Siguiente",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.alfanet.ec/web/image/11311108-0915f043/Confiabilidad%20comprobada%20.png",
+        "context_text": "CONFIABILIDAD COMPROBADA",
+        "alt_text": ""
+      },
+      {
+        "url": "https://www.alfanet.ec/web/image/11311128-e7b0c711/Seguridad%20avanzada%20.png",
+        "context_text": "SEGURIDAD AVANZADA",
+        "alt_text": ""
       }
     ],
     "image_errors": [
-      "Image 1 (https://www.alfanet.ec/web/image/12878112-be4a4094/Descuento%2C%20Servicios%20y%20Beneficios.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbfabvKxD8Q1R6TCF6k'}",
-      "Image 2 (https://www.alfanet.ec/web/image/15017344-4e746671/Zapping_Chile_2020%20%282%29.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbfcHNm2ayyTyiYpe5p'}",
-      "Image 3 (https://www.alfanet.ec/web/image/15017273-c283b49e/Dise%C3%B1o%20sin%20t%C3%ADtulo%20%2845%29.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbfeL9xcxWnfFkkWFAw'}",
-      "Image 4 (https://www.alfanet.ec/web/image/14393098-7e4f0d21/Mini%20Banner_2.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbfgyeZ92e7jtdAL35D'}",
-      "Image 5 (https://www.alfanet.ec/web/image/9794908-3918491d/Banner%20para%20sitio%20web%201.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbfnVY6Ty8WbHuscMhw'}"
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text",
+      "OCR returned empty text"
     ]
   },
   "fibramax": {
@@ -333,7 +526,7 @@
         "plans_extracted_html": 1,
         "errors": [],
         "discovered_urls": [],
-        "images_discovered": 5
+        "images_discovered": 10
       }
     ],
     "images": [
@@ -361,14 +554,36 @@
         "url": "https://fibramax.ec/wp-content/uploads/2025/04/baner2.jpg",
         "context_text": "",
         "alt_text": ""
+      },
+      {
+        "url": "https://fibramax.ec/wp-content/uploads/2020/11/6_Mesa-de-trabajo-1.png",
+        "context_text": "",
+        "alt_text": ""
+      },
+      {
+        "url": "https://fibramax.ec/wp-content/uploads/2020/12/Este2021-02.png",
+        "context_text": "",
+        "alt_text": ""
+      },
+      {
+        "url": "https://fibramax.ec/wp-content/uploads/2020/11/7_Mesa-de-trabajo-1.png",
+        "context_text": "",
+        "alt_text": ""
+      },
+      {
+        "url": "https://fibramax.ec/wp-content/uploads/2024/01/cel2.png",
+        "context_text": "",
+        "alt_text": ""
+      },
+      {
+        "url": "https://fibramax.ec/wp-content/uploads/2026/02/pop-up-ganadores-wifi-dorado.jpg.jpeg",
+        "context_text": "",
+        "alt_text": ""
       }
     ],
     "image_errors": [
-      "Image 1 (https://fibramax.ec/wp-content/uploads/2026/01/banner-celular-premios-1.jpg): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbivnSi7M9tES4VvEtE'}",
-      "Image 2 (https://fibramax.ec/wp-content/uploads/2026/01/portada-web-atualizada.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbiyuiJfQRJAC7aZ2WS'}",
-      "Image 3 (https://fibramax.ec/wp-content/uploads/2025/04/baner1.jpg): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbj3cTWZqRpRtwSL2KW'}",
-      "Image 4 (https://fibramax.ec/wp-content/uploads/2022/10/ST.png): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbj8o1BxqswmG5Jotdt'}",
-      "Image 5 (https://fibramax.ec/wp-content/uploads/2025/04/baner2.jpg): Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CaDbjC2xzRog94FLnWyQf'}"
+      "OCR returned empty text",
+      "OCR returned empty text"
     ]
   }
 }

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NetFury — Comparativa Benchmark</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232736;
+    --border: #2e3348;
+    --text: #e2e4ed;
+    --text-dim: #8b8fa7;
+    --accent: #6c5ce7;
+    --accent-light: #a29bfe;
+    --green: #00cec9;
+    --green-dim: rgba(0,206,201,.12);
+    --red: #ff6b6b;
+    --red-dim: rgba(255,107,107,.12);
+    --yellow: #feca57;
+    --yellow-dim: rgba(254,202,87,.12);
+    --blue: #54a0ff;
+    --blue-dim: rgba(84,160,255,.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-light), var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: .4rem;
+  }
+
+  header p {
+    color: var(--text-dim);
+    font-size: .9rem;
+  }
+
+  /* ── KPI cards ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .kpi::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .kpi.accent::before { background: var(--accent); }
+  .kpi.green::before  { background: var(--green); }
+  .kpi.yellow::before { background: var(--yellow); }
+  .kpi.blue::before   { background: var(--blue); }
+
+  .kpi-label { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text-dim); margin-bottom: .35rem; }
+  .kpi-row { display: flex; align-items: baseline; gap: 1rem; }
+  .kpi-value { font-size: 1.8rem; font-weight: 700; }
+  .kpi-sub { font-size: .85rem; color: var(--text-dim); }
+
+  .kpi.accent .kpi-value { color: var(--accent-light); }
+  .kpi.green  .kpi-value { color: var(--green); }
+  .kpi.yellow .kpi-value { color: var(--yellow); }
+  .kpi.blue   .kpi-value { color: var(--blue); }
+
+  /* ── Section ── */
+  .section { margin-bottom: 2.5rem; }
+  .section h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: .88rem;
+  }
+
+  thead th {
+    background: var(--surface2);
+    padding: .75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody td {
+    padding: .7rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+
+  .badge {
+    display: inline-block;
+    padding: .15rem .55rem;
+    border-radius: 6px;
+    font-size: .75rem;
+    font-weight: 600;
+  }
+
+  .badge-ok   { background: var(--green-dim); color: var(--green); }
+  .badge-warn { background: var(--yellow-dim); color: var(--yellow); }
+  .badge-fail { background: var(--red-dim); color: var(--red); }
+  .badge-info { background: var(--blue-dim); color: var(--blue); }
+
+  .num-right { text-align: right; font-variant-numeric: tabular-nums; }
+  .highlight { color: var(--green); font-weight: 600; }
+  .dim { color: var(--text-dim); }
+
+  /* ── Bar chart ── */
+  .bar-chart { display: flex; flex-direction: column; gap: .6rem; margin-top: .5rem; }
+  .bar-row { display: flex; align-items: center; gap: .75rem; }
+  .bar-label { width: 80px; font-size: .82rem; text-align: right; color: var(--text-dim); }
+  .bar-track { flex: 1; height: 28px; background: var(--surface2); border-radius: 6px; position: relative; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: .75rem; font-size: .78rem; font-weight: 600; transition: width .6s ease; }
+  .bar-fill.full  { background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+  .bar-fill.recur { background: linear-gradient(90deg, var(--green), #55efc4); }
+  .bar-val { width: 55px; font-size: .82rem; font-weight: 600; text-align: right; }
+
+  /* ── Insights ── */
+  .insights { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .insight-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--accent);
+  }
+  .insight-card h3 { font-size: .9rem; font-weight: 600; margin-bottom: .4rem; }
+  .insight-card p { font-size: .82rem; color: var(--text-dim); line-height: 1.55; }
+  .insight-card.warn { border-left-color: var(--yellow); }
+  .insight-card.good { border-left-color: var(--green); }
+  .insight-card.bad  { border-left-color: var(--red); }
+
+  /* ── Footer ── */
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-dim);
+    font-size: .78rem;
+  }
+
+  footer span { color: var(--accent-light); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>NetFury &mdash; Comparativa de Benchmarks</h1>
+    <p>benchmark-full vs benchmark-recursive-images (OCR) &bull; 19 abril 2026</p>
+  </header>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi accent">
+      <div class="kpi-label">Tiempo &mdash; Full</div>
+      <div class="kpi-row">
+        <div class="kpi-value">3m 27s</div>
+        <div class="kpi-sub">38.4s CPU</div>
+      </div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-label">Tiempo &mdash; Recursivo OCR</div>
+      <div class="kpi-row">
+        <div class="kpi-value">15m 35s</div>
+        <div class="kpi-sub">89.2s CPU</div>
+      </div>
+    </div>
+    <div class="kpi yellow">
+      <div class="kpi-label">Planes &mdash; Full</div>
+      <div class="kpi-row">
+        <div class="kpi-value">18</div>
+        <div class="kpi-sub">4 ISPs con datos</div>
+      </div>
+    </div>
+    <div class="kpi blue">
+      <div class="kpi-label">Planes &mdash; Recursivo OCR</div>
+      <div class="kpi-row">
+        <div class="kpi-value">33</div>
+        <div class="kpi-sub">5 ISPs con datos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary table -->
+  <div class="section">
+    <h2>Resumen General</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Metrica</th>
+          <th class="num-right">benchmark-full</th>
+          <th class="num-right">recursive-images (OCR)</th>
+          <th class="num-right">Diferencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tiempo total</td>
+          <td class="num-right">3m 27s</td>
+          <td class="num-right">15m 35s</td>
+          <td class="num-right"><span class="badge badge-warn">+4.5x</span></td>
+        </tr>
+        <tr>
+          <td>CPU user</td>
+          <td class="num-right">38.4s</td>
+          <td class="num-right">89.2s</td>
+          <td class="num-right"><span class="badge badge-warn">+2.3x</span></td>
+        </tr>
+        <tr>
+          <td>Planes extraidos</td>
+          <td class="num-right">18</td>
+          <td class="num-right highlight">33</td>
+          <td class="num-right"><span class="badge badge-ok">+83%</span></td>
+        </tr>
+        <tr>
+          <td>ISPs con datos</td>
+          <td class="num-right">4 / 8</td>
+          <td class="num-right highlight">5 / 8</td>
+          <td class="num-right"><span class="badge badge-ok">+1 ISP</span></td>
+        </tr>
+        <tr>
+          <td>Paginas crawleadas</td>
+          <td class="num-right dim">8 (1 por ISP)</td>
+          <td class="num-right">25</td>
+          <td class="num-right"><span class="badge badge-info">+3.1x</span></td>
+        </tr>
+        <tr>
+          <td>Imagenes analizadas</td>
+          <td class="num-right dim">0</td>
+          <td class="num-right">52</td>
+          <td class="num-right"><span class="badge badge-info">+52</span></td>
+        </tr>
+        <tr>
+          <td>Planes desde OCR</td>
+          <td class="num-right dim">&mdash;</td>
+          <td class="num-right" style="color:var(--red);">0</td>
+          <td class="num-right"><span class="badge badge-fail">0%</span></td>
+        </tr>
+        <tr>
+          <td>Costo</td>
+          <td class="num-right">$0</td>
+          <td class="num-right">$0</td>
+          <td class="num-right"><span class="badge badge-ok">FREE</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Per-ISP table -->
+  <div class="section">
+    <h2>Detalle por ISP</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ISP</th>
+          <th class="num-right">Full (planes)</th>
+          <th class="num-right">Recursivo (planes)</th>
+          <th class="num-right">Pags crawl</th>
+          <th class="num-right">Imgs analizadas</th>
+          <th class="num-right">Planes desde OCR</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Netlife</strong></td>
+          <td class="num-right highlight">10</td>
+          <td class="num-right" style="color:var(--red);">0</td>
+          <td class="num-right">4</td>
+          <td class="num-right">4</td>
+          <td class="num-right dim">0</td>
+          <td><span class="badge badge-fail">Full gana</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ecuanet</strong></td>
+          <td class="num-right">4</td>
+          <td class="num-right">4</td>
+          <td class="num-right">1</td>
+          <td class="num-right">10</td>
+          <td class="num-right dim">0</td>
+          <td><span class="badge badge-info">Empate</span></td>
+        </tr>
+        <tr>
+          <td><strong>Claro</strong></td>
+          <td class="num-right">3</td>
+          <td class="num-right highlight">19</td>
+          <td class="num-right">6</td>
+          <td class="num-right">10</td>
+          <td class="num-right dim">0</td>
+          <td><span class="badge badge-ok">Recursivo +533%</span></td>
+        </tr>
+        <tr>
+          <td><strong>CNT</strong></td>
+          <td class="num-right dim">0</td>
+          <td class="num-right dim">0</td>
+          <td class="num-right">1</td>
+          <td class="num-right dim">0</td>
+          <td class="num-right dim">0</td>
+          <td><span class="badge badge-warn">Sin datos</span></td>
+        </tr>
+        <tr>
+          <td><strong>Xtrim</strong></td>
+          <td class="num-right dim">0</td>
+          <td class="num-right highlight">4</td>
+          <td class="num-right">5</td>
+          <td class="num-right">8</td>
+          <td class="num-right dim">0</td>
+          <td><span class="badge badge-ok">Recursivo gana</span></td>
+        </tr>
+        <tr>
+          <td><strong>Puntonet</strong></td>
+          <td class="num-right dim">0</td>
+          <td class="num-right dim">0</td>
+          <td class="num-right">1</td>
+          <td class="num-right dim">0</td>
+          <td class="num-right dim">0</td>
+          <td><span class="badge badge-warn">Sin datos</span></td>
+        </tr>
+        <tr>
+          <td><strong>Alfanet</strong></td>
+          <td class="num-right">1</td>
+          <td class="num-right highlight">5</td>
+          <td class="num-right">6</td>
+          <td class="num-right">10</td>
+          <td class="num-right dim">0</td>
+          <td><span class="badge badge-ok">Recursivo +400%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Fibramax</strong></td>
+          <td class="num-right dim">0</td>
+          <td class="num-right">1</td>
+          <td class="num-right">1</td>
+          <td class="num-right">10</td>
+          <td class="num-right dim">0</td>
+          <td><span class="badge badge-ok">Recursivo gana</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Visual bar comparison -->
+  <div class="section">
+    <h2>Planes Extraidos por ISP</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+      <!-- Full -->
+      <div>
+        <p style="font-size:.8rem;color:var(--text-dim);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em;">benchmark-full</p>
+        <div class="bar-chart">
+          <div class="bar-row">
+            <div class="bar-label">Netlife</div>
+            <div class="bar-track"><div class="bar-fill full" style="width:52.6%;">10</div></div>
+            <div class="bar-val">10</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Ecuanet</div>
+            <div class="bar-track"><div class="bar-fill full" style="width:21%;">4</div></div>
+            <div class="bar-val">4</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Claro</div>
+            <div class="bar-track"><div class="bar-fill full" style="width:15.8%;">3</div></div>
+            <div class="bar-val">3</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">CNT</div>
+            <div class="bar-track"><div class="bar-fill full" style="width:0%;"></div></div>
+            <div class="bar-val dim">0</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Xtrim</div>
+            <div class="bar-track"><div class="bar-fill full" style="width:0%;"></div></div>
+            <div class="bar-val dim">0</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Puntonet</div>
+            <div class="bar-track"><div class="bar-fill full" style="width:0%;"></div></div>
+            <div class="bar-val dim">0</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Alfanet</div>
+            <div class="bar-track"><div class="bar-fill full" style="width:5.3%;">1</div></div>
+            <div class="bar-val">1</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Fibramax</div>
+            <div class="bar-track"><div class="bar-fill full" style="width:0%;"></div></div>
+            <div class="bar-val dim">0</div>
+          </div>
+        </div>
+      </div>
+      <!-- Recursive -->
+      <div>
+        <p style="font-size:.8rem;color:var(--text-dim);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em;">recursive-images (OCR)</p>
+        <div class="bar-chart">
+          <div class="bar-row">
+            <div class="bar-label">Netlife</div>
+            <div class="bar-track"><div class="bar-fill recur" style="width:0%;"></div></div>
+            <div class="bar-val dim">0</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Ecuanet</div>
+            <div class="bar-track"><div class="bar-fill recur" style="width:21%;">4</div></div>
+            <div class="bar-val">4</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Claro</div>
+            <div class="bar-track"><div class="bar-fill recur" style="width:100%;">19</div></div>
+            <div class="bar-val highlight">19</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">CNT</div>
+            <div class="bar-track"><div class="bar-fill recur" style="width:0%;"></div></div>
+            <div class="bar-val dim">0</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Xtrim</div>
+            <div class="bar-track"><div class="bar-fill recur" style="width:21%;">4</div></div>
+            <div class="bar-val">4</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Puntonet</div>
+            <div class="bar-track"><div class="bar-fill recur" style="width:0%;"></div></div>
+            <div class="bar-val dim">0</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Alfanet</div>
+            <div class="bar-track"><div class="bar-fill recur" style="width:26.3%;">5</div></div>
+            <div class="bar-val">5</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Fibramax</div>
+            <div class="bar-track"><div class="bar-fill recur" style="width:5.3%;">1</div></div>
+            <div class="bar-val">1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insights -->
+  <div class="section">
+    <h2>Hallazgos Clave</h2>
+    <div class="insights">
+      <div class="insight-card warn">
+        <h3>4.5x mas lento</h3>
+        <p>El recursivo toma 15m 35s vs 3m 27s. El overhead viene del crawl multi-pagina y la descarga de 52 imagenes. El OCR en si es rapido (&lt;0.5s por imagen).</p>
+      </div>
+      <div class="insight-card good">
+        <h3>+83% mas planes</h3>
+        <p>33 vs 18 planes. La ganancia viene 100% del HTML de paginas internas descubiertas por el crawler, no del OCR. Claro (+533%), Alfanet (+400%) y Xtrim (0&rarr;4) son los mayores beneficiados.</p>
+      </div>
+      <div class="insight-card bad">
+        <h3>OCR no aporto nada</h3>
+        <p>De 52 imagenes analizadas, Tesseract extrajo 0 planes. Muchas son .webp/.svg incompatibles, y los banners promocionales no tienen texto estructurado precio+velocidad parseable por regex.</p>
+      </div>
+      <div class="insight-card bad">
+        <h3>Netlife: regresion</h3>
+        <p>benchmark-full usa rendering interactivo (click en tabs) y extrae 10 planes. El recursivo no activa tabs en el HTML estatico, resultando en 0 planes. La estrategia interactiva es critica para Netlife.</p>
+      </div>
+      <div class="insight-card good">
+        <h3>Claro: gran descubrimiento</h3>
+        <p>El crawler descubrio el catalogo interno de Claro (catalogo.claro.com.ec) con detalle de cada plan individual. Paso de 3 a 19 planes &mdash; la mayor ganancia del recursivo.</p>
+      </div>
+      <div class="insight-card">
+        <h3>Siguiente paso: --mode llm</h3>
+        <p>Para que las imagenes aporten planes, se necesita el modo LLM vision (--mode llm) que puede interpretar banners visualmente. El OCR local es insuficiente para este tipo de contenido grafico.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Generado por <span>NetFury</span> &bull; 19 abril 2026 &bull; Ambos benchmarks ejecutados en paralelo sobre la misma maquina
+  </footer>
+
+</div>
+</body>
+</html>
