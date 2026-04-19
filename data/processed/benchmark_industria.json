@@ -1,176 +1,184 @@
 [
   {
-    "fecha": "2026-04-18T19:05:24.555706",
+    "fecha": "2026-04-18T22:01:13.846547",
     "anio": 2026,
     "mes": 4,
     "dia": 18,
-    "empresa": "MEGADATOS S.A.",
-    "marca": "Netlife",
-    "nombre_plan": "Plan 750 Mbps",
-    "velocidad_download_mbps": 750.0,
-    "velocidad_upload_mbps": null,
-    "precio_plan": 25.75,
-    "precio_plan_tarjeta": 26.66,
-    "precio_plan_debito": null,
-    "precio_plan_efectivo": null,
-    "precio_plan_descuento": null,
-    "descuento": 10.0,
-    "meses_descuento": 6,
-    "costo_instalacion": null,
-    "comparticion": "2:1",
-    "pys_adicionales": 4,
-    "pys_adicionales_detalle": {
-      "extender": {
-        "tipo_plan": "extender",
-        "meses": null,
-        "categoria": "conectividad"
-      },
-      "paramount": {
-        "tipo_plan": "paramount",
-        "meses": null,
-        "categoria": "streaming"
-      },
-      "assistance_pro": {
-        "tipo_plan": "assistance_pro",
-        "meses": null,
-        "categoria": "soporte"
-      },
-      "netlife_play": {
-        "tipo_plan": "netlife_play",
-        "meses": null,
-        "categoria": "streaming"
-      }
-    },
-    "meses_contrato": null,
-    "facturas_gratis": null,
-    "tecnologia": "fibra_optica",
-    "sectores": [],
-    "parroquia": [],
-    "canton": [],
-    "provincia": [],
-    "factura_anterior": null,
-    "terminos_condiciones": "Descuento aplica con tarjeta de crédito. ",
-    "beneficios_publicitados": "Equipo Wifi 6; 3 Dispositivos con Netlife Defense; Velocidad máxima 750Mbps; 1 Punto de cableado Ethernet; Netlife Access"
-  },
-  {
-    "fecha": "2026-04-18T19:05:24.555706",
-    "anio": 2026,
-    "mes": 4,
-    "dia": 18,
-    "empresa": "MEGADATOS S.A.",
-    "marca": "Netlife",
-    "nombre_plan": "Plan 1000 Mbps",
+    "empresa": "SETEL S.A.",
+    "marca": "Xtrim",
+    "nombre_plan": "Plan Prime",
     "velocidad_download_mbps": 1000.0,
     "velocidad_upload_mbps": null,
-    "precio_plan": 31.5,
-    "precio_plan_tarjeta": 25.36,
+    "precio_plan": 36.96,
+    "precio_plan_tarjeta": null,
     "precio_plan_debito": null,
     "precio_plan_efectivo": null,
     "precio_plan_descuento": null,
-    "descuento": 30.0,
-    "meses_descuento": 9,
-    "costo_instalacion": null,
-    "comparticion": "2:1",
-    "pys_adicionales": 5,
+    "descuento": null,
+    "meses_descuento": null,
+    "costo_instalacion": 0.0,
+    "comparticion": null,
+    "pys_adicionales": 3,
     "pys_adicionales_detalle": {
-      "extender": {
-        "tipo_plan": "extender",
-        "meses": null,
-        "categoria": "conectividad"
-      },
-      "paramount": {
-        "tipo_plan": "paramount",
+      "liga_ecuabet": {
+        "tipo_plan": "liga_ecuabet",
         "meses": null,
         "categoria": "streaming"
       },
-      "assistance_pro": {
-        "tipo_plan": "assistance_pro",
-        "meses": null,
-        "categoria": "soporte"
-      },
-      "netlife_play": {
-        "tipo_plan": "netlife_play",
+      "disney_plus": {
+        "tipo_plan": "disney_plus_premium",
         "meses": null,
         "categoria": "streaming"
       },
-      "svc_2_extender": {
-        "tipo_plan": "svc_2_extender",
+      "zapping": {
+        "tipo_plan": "zapping_basico",
         "meses": null,
-        "categoria": "conectividad"
+        "categoria": "streaming"
       }
     },
     "meses_contrato": null,
-    "facturas_gratis": null,
+    "facturas_gratis": 4,
     "tecnologia": "fibra_optica",
     "sectores": [],
     "parroquia": [],
     "canton": [],
     "provincia": [],
     "factura_anterior": null,
-    "terminos_condiciones": "Descuento aplica con tarjeta de crédito. ",
-    "beneficios_publicitados": "Equipo Wifi 6 Premium; 3 Dispositivos con Netlife Defense; Velocidad máxima 950Mbps; 1 Punto de cableado Ethernet; Netlife Access"
+    "terminos_condiciones": "Precio indefinido",
+    "beneficios_publicitados": "routerRouter adicional GRATIS con cualquier forma de pago; checkCuarta factura GRATIS; wifiInstalación GRATIS"
   },
   {
-    "fecha": "2026-04-18T19:05:24.555706",
+    "fecha": "2026-04-18T22:01:13.846547",
     "anio": 2026,
     "mes": 4,
     "dia": 18,
-    "empresa": "MEGADATOS S.A.",
-    "marca": "Netlife",
-    "nombre_plan": "Plan 2000 Mbps",
-    "velocidad_download_mbps": 2000.0,
-    "velocidad_upload_mbps": 1000.0,
-    "precio_plan": 99.99,
-    "precio_plan_tarjeta": 57.49,
+    "empresa": "SETEL S.A.",
+    "marca": "Xtrim",
+    "nombre_plan": "Plan Supreme Pro",
+    "velocidad_download_mbps": 1000.0,
+    "velocidad_upload_mbps": null,
+    "precio_plan": 34.78,
+    "precio_plan_tarjeta": null,
     "precio_plan_debito": null,
     "precio_plan_efectivo": null,
     "precio_plan_descuento": null,
-    "descuento": 50.0,
-    "meses_descuento": 12,
-    "costo_instalacion": null,
-    "comparticion": "2:1",
-    "pys_adicionales": 6,
+    "descuento": null,
+    "meses_descuento": null,
+    "costo_instalacion": 0.0,
+    "comparticion": null,
+    "pys_adicionales": 3,
     "pys_adicionales_detalle": {
-      "assistance_pro": {
-        "tipo_plan": "assistance_pro",
-        "meses": null,
-        "categoria": "soporte"
-      },
-      "svc_2_extender": {
-        "tipo_plan": "svc_2_extender",
-        "meses": null,
-        "categoria": "conectividad"
-      },
-      "paramount": {
-        "tipo_plan": "paramount",
+      "liga_ecuabet": {
+        "tipo_plan": "liga_ecuabet",
         "meses": null,
         "categoria": "streaming"
       },
-      "netlife_play": {
-        "tipo_plan": "netlife_play",
+      "hbo": {
+        "tipo_plan": "hbo",
+        "meses": null,
+        "categoria": "otros"
+      },
+      "zapping": {
+        "tipo_plan": "zapping_basico",
         "meses": null,
         "categoria": "streaming"
-      },
-      "assistance_ppro": {
-        "tipo_plan": "assistance_ppro",
-        "meses": null,
-        "categoria": "soporte"
-      },
-      "extender": {
-        "tipo_plan": "extender",
-        "meses": null,
-        "categoria": "conectividad"
       }
     },
     "meses_contrato": null,
-    "facturas_gratis": null,
+    "facturas_gratis": 4,
     "tecnologia": "fibra_optica",
     "sectores": [],
     "parroquia": [],
     "canton": [],
     "provincia": [],
     "factura_anterior": null,
-    "terminos_condiciones": "Descuento aplica con tarjeta de crédito. ",
-    "beneficios_publicitados": "Equipo Wifi 6 Premium; 3 Dispositivos con Netlife Defense; 1 Punto de cableado Ethernet; Netlife Access"
+    "terminos_condiciones": "Precio indefinido",
+    "beneficios_publicitados": "routerRouter adicional GRATIS con cualquier forma de pago; checkCuarta factura GRATIS; wifiInstalación GRATIS"
+  },
+  {
+    "fecha": "2026-04-18T22:01:13.846547",
+    "anio": 2026,
+    "mes": 4,
+    "dia": 18,
+    "empresa": "SETEL S.A.",
+    "marca": "Xtrim",
+    "nombre_plan": "Plan Elite Pro",
+    "velocidad_download_mbps": 800.0,
+    "velocidad_upload_mbps": null,
+    "precio_plan": 28.0,
+    "precio_plan_tarjeta": null,
+    "precio_plan_debito": null,
+    "precio_plan_efectivo": null,
+    "precio_plan_descuento": null,
+    "descuento": null,
+    "meses_descuento": null,
+    "costo_instalacion": 0.0,
+    "comparticion": null,
+    "pys_adicionales": 2,
+    "pys_adicionales_detalle": {
+      "liga_ecuabet": {
+        "tipo_plan": "liga_ecuabet",
+        "meses": null,
+        "categoria": "streaming"
+      },
+      "zapping": {
+        "tipo_plan": "zapping_basico",
+        "meses": null,
+        "categoria": "streaming"
+      }
+    },
+    "meses_contrato": null,
+    "facturas_gratis": 4,
+    "tecnologia": "fibra_optica",
+    "sectores": [],
+    "parroquia": [],
+    "canton": [],
+    "provincia": [],
+    "factura_anterior": null,
+    "terminos_condiciones": "Precio indefinido",
+    "beneficios_publicitados": "routerRouter adicional GRATIS pagando con TC; checkCuarta factura GRATIS; wifiInstalación GRATIS"
+  },
+  {
+    "fecha": "2026-04-18T22:01:13.846547",
+    "anio": 2026,
+    "mes": 4,
+    "dia": 18,
+    "empresa": "SETEL S.A.",
+    "marca": "Xtrim",
+    "nombre_plan": "Plan Essential 2",
+    "velocidad_download_mbps": 200.0,
+    "velocidad_upload_mbps": null,
+    "precio_plan": 28.0,
+    "precio_plan_tarjeta": null,
+    "precio_plan_debito": null,
+    "precio_plan_efectivo": null,
+    "precio_plan_descuento": null,
+    "descuento": null,
+    "meses_descuento": null,
+    "costo_instalacion": 0.0,
+    "comparticion": null,
+    "pys_adicionales": 2,
+    "pys_adicionales_detalle": {
+      "liga_ecuabet": {
+        "tipo_plan": "liga_ecuabet",
+        "meses": null,
+        "categoria": "streaming"
+      },
+      "zapping": {
+        "tipo_plan": "zapping_basico",
+        "meses": null,
+        "categoria": "streaming"
+      }
+    },
+    "meses_contrato": null,
+    "facturas_gratis": 4,
+    "tecnologia": "fibra_optica",
+    "sectores": [],
+    "parroquia": [],
+    "canton": [],
+    "provincia": [],
+    "factura_anterior": null,
+    "terminos_condiciones": "Precio indefinido",
+    "beneficios_publicitados": "routerRouter adicional GRATIS pagando con TC; checkCuarta factura GRATIS; wifiInstalación GRATIS"
   }
 ]

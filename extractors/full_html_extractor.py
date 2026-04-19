@@ -74,14 +74,209 @@ def _get_rendered_html(url: str, *, wait_ms: int = 8000) -> str:
     return html
 
 
+# Selectors for interactive elements (tabs, sliders, nav buttons)
+_TAB_SELECTORS = [
+    # ISP-specific: netlifeinternet.ec Home/Pro/Pyme buttons
+    ".planes-btn",
+    ".botones button",
+    # Generic tab selectors
+    '[role="tab"]',
+    ".nav-tab",
+    ".tab-link",
+    '[class*="tab-item"]',
+    '[class*="tab-button"]',
+    '[class*="category"]',
+    '[class*="segment"]',
+    'a[data-toggle="tab"]',
+    'button[data-toggle="tab"]',
+    ".nav-link",
+    ".elementor-tab-title",
+]
+
+_SLIDER_NEXT_SELECTORS = [
+    ".swiper-button-next",
+    ".slick-next",
+    ".owl-next",
+    ".carousel-control-next",
+    '[aria-label*="next" i]',
+    '[aria-label*="siguiente" i]',
+]
+
+_SLIDER_DOT_SELECTORS = [
+    ".swiper-pagination-bullet",
+    ".slick-dots button",
+    ".owl-dot",
+]
+
+
+def _get_rendered_html_interactive(
+    url: str,
+    *,
+    wait_ms: int = 8000,
+    max_slider_clicks: int = 8,
+    interaction_wait_ms: int = 1500,
+) -> list[str]:
+    """Fetch rendered HTML by interacting with tabs, sliders, and buttons.
+
+    Instead of a single snapshot, this function:
+    1. Loads the page and collects initial HTML
+    2. Clicks through tab/navigation elements (Home, Pro, Pyme, etc.)
+    3. Clicks slider next buttons and dots
+    4. Returns ALL collected HTML snapshots so parsers see every state
+
+    Args:
+        url: Page URL.
+        wait_ms: Extra wait after networkidle.
+        max_slider_clicks: Max clicks per slider next button.
+        interaction_wait_ms: Wait after each click for content to load.
+
+    Returns:
+        List of HTML strings, one per page state discovered.
+    """
+    cfg = get_settings()
+    html_snapshots: list[str] = []
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--ignore-certificate-errors",
+                "--disable-blink-features=AutomationControlled",
+            ],
+        )
+        context = browser.new_context(
+            viewport={
+                "width": cfg.screenshot_width,
+                "height": cfg.screenshot_height,
+            },
+            user_agent=(
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) "
+                "AppleWebKit/605.1.15 (KHTML, like Gecko) "
+                "Version/18.0 Safari/605.1.15"
+            ),
+        )
+        page = context.new_page()
+
+        logger.info("Interactive render: loading %s", url)
+        page.goto(url, wait_until="networkidle", timeout=60000)
+        page.wait_for_timeout(wait_ms)
+
+        # Scroll full page to trigger lazy loading
+        page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+        page.wait_for_timeout(2000)
+        page.evaluate("window.scrollTo(0, 0)")
+        page.wait_for_timeout(1000)
+
+        # Phase 1: Initial state
+        html_snapshots.append(page.content())
+        logger.info("Interactive render: initial snapshot collected")
+
+        # Phase 2: Click through tabs (e.g. Home / Pro / Pyme buttons)
+        for selector in _TAB_SELECTORS:
+            try:
+                tabs = page.query_selector_all(selector)
+                if not tabs or len(tabs) < 2:
+                    continue
+
+                logger.info(
+                    "Interactive render: found %d tabs with '%s'",
+                    len(tabs), selector,
+                )
+                for i, tab in enumerate(tabs):
+                    try:
+                        if tab.is_visible():
+                            label = tab.inner_text()[:40].strip()
+                            tab.click()
+                            page.wait_for_timeout(interaction_wait_ms)
+                            # Scroll to load lazy content in this tab
+                            page.evaluate(
+                                "window.scrollTo(0, document.body.scrollHeight)",
+                            )
+                            page.wait_for_timeout(800)
+                            page.evaluate("window.scrollTo(0, 0)")
+                            page.wait_for_timeout(500)
+                            snapshot = page.content()
+                            html_snapshots.append(snapshot)
+                            logger.info(
+                                "Interactive render: tab '%s' snapshot collected",
+                                label,
+                            )
+                    except Exception:
+                        pass
+                # Only use the first matching selector group
+                break
+            except Exception:
+                pass
+
+        # Phase 3: Click slider next buttons
+        for selector in _SLIDER_NEXT_SELECTORS:
+            try:
+                btns = page.query_selector_all(selector)
+                if not btns:
+                    continue
+                for btn in btns:
+                    for _ in range(max_slider_clicks):
+                        try:
+                            if not btn.is_visible():
+                                break
+                            btn.click()
+                            page.wait_for_timeout(interaction_wait_ms)
+                            html_snapshots.append(page.content())
+                        except Exception:
+                            break
+            except Exception:
+                pass
+
+        # Phase 4: Click slider dots/indicators
+        for selector in _SLIDER_DOT_SELECTORS:
+            try:
+                dots = page.query_selector_all(selector)
+                if not dots:
+                    continue
+                for dot in dots:
+                    try:
+                        if dot.is_visible():
+                            dot.click()
+                            page.wait_for_timeout(interaction_wait_ms)
+                            html_snapshots.append(page.content())
+                    except Exception:
+                        pass
+            except Exception:
+                pass
+
+        # Phase 5: Final sweep after all interactions
+        final = page.content()
+        if final != html_snapshots[-1]:
+            html_snapshots.append(final)
+
+        context.close()
+        browser.close()
+
+    logger.info(
+        "Interactive render: %d snapshots from %s",
+        len(html_snapshots), url,
+    )
+    return html_snapshots
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
 def _extract_number(text: str) -> float | None:
-    """Extract first numeric value from text."""
+    """Extract first numeric value from text.
+
+    Handles Gbps → Mbps conversion (e.g., "1.1Gbps" → 1100.0).
+    """
     if not text:
         return None
+    # Handle Gbps → Mbps conversion before extracting
+    gbps_match = re.search(r"([\d.]+)\s*[Gg]bps", text)
+    if gbps_match:
+        try:
+            return float(gbps_match.group(1)) * 1000
+        except ValueError:
+            pass
     cleaned = text.replace(",", ".").replace("\xa0", "")
     match = re.search(r"(\d+\.?\d*)", cleaned)
     if match:
@@ -449,6 +644,348 @@ def _parse_netlife(html: str) -> list[dict]:
     return plans
 
 
+def _parse_netlife_internet(htmls: str | list[str]) -> list[dict]:
+    """Parse netlifeinternet.ec plan cards from rendered HTML.
+
+    netlifeinternet.ec uses a Swiper.js carousel with flip cards:
+    - Front: name, speed promo, price, discount %, facturas, payment method
+    - Back: full specs (velocidades, comparticion, tecnologia, servicios)
+
+    The page has tabs: Home (default), Pro, Pyme — each shows different
+    plans in its own Swiper. The interactive renderer clicks these tabs
+    and collects a snapshot per state. This parser merges all snapshots.
+
+    Args:
+        htmls: Single HTML string or list of HTML snapshots from
+            interactive rendering.
+
+    Returns:
+        List of plan dicts with all extractable fields.
+    """
+    if isinstance(htmls, str):
+        htmls = [htmls]
+
+    all_plans: list[dict] = []
+    seen_keys: set[tuple] = set()
+
+    # Global data extracted once from any snapshot
+    costo_instalacion: float | None = None
+    meses_contrato: int | None = None
+    terminos_condiciones_global: str = ""
+
+    for html in htmls:
+        soup = BeautifulSoup(html, "lxml")
+
+        # Extract global footer info (once)
+        if costo_instalacion is None:
+            for el in soup.find_all(
+                string=re.compile(r"instalaci[oó]n", re.IGNORECASE),
+            ):
+                text = el.strip() if isinstance(el, str) else _get_text(el)
+                match = re.search(r"\$\s*([\d.,]+)", text.replace(".", "").replace(",", "."))
+                if not match:
+                    match = re.search(r"\$([\d]+[.,][\d]+)", text)
+                if match:
+                    try:
+                        val = float(match.group(1).replace(",", "."))
+                        if val > 50:
+                            costo_instalacion = val
+                    except ValueError:
+                        pass
+
+        if meses_contrato is None:
+            for el in soup.find_all(
+                string=re.compile(r"permanencia", re.IGNORECASE),
+            ):
+                text = el.strip() if isinstance(el, str) else _get_text(el)
+                match = re.search(r"(\d+)\s*meses", text)
+                if match:
+                    meses_contrato = int(match.group(1))
+
+            for el in soup.find_all(
+                string=re.compile(r"Vigencia", re.IGNORECASE),
+            ):
+                text = el.strip() if isinstance(el, str) else _get_text(el)
+                if text and len(text) > 10:
+                    terminos_condiciones_global += text + " "
+
+        # Parse each card
+        cards = soup.find_all(class_="card")
+        for card in cards:
+            front = card.find(class_="card-face-front")
+            back = card.find(class_="card-face-back")
+            if not front:
+                continue
+
+            plan: dict = {"tecnologia": "fibra_optica"}
+
+            # --- FRONT: pricing and promo info ---
+
+            # Plan name from .arriba div (first direct text child)
+            arriba = front.find(
+                class_=lambda c: c and "arriba" in c,
+            )
+            nombre = ""
+            if arriba:
+                for child in arriba.children:
+                    if isinstance(child, str) and child.strip():
+                        nombre = child.strip()
+                        break
+                if not nombre:
+                    # Try first non-div text
+                    for child in arriba.children:
+                        if hasattr(child, "name") and child.name not in (
+                            "div", "span",
+                        ):
+                            t = _get_text(child)
+                            if t:
+                                nombre = t
+                                break
+                if not nombre:
+                    nombre = _get_text(arriba).split("PLAN")[0].strip()
+
+            plan["nombre_plan"] = nombre or "Plan sin nombre"
+
+            # Price sin IVA from .precio
+            precio_el = front.find(class_="precio")
+            if precio_el:
+                precio_text = _get_text(precio_el).replace("+IMP", "").strip()
+                price = _extract_number(precio_text)
+                if price:
+                    plan["precio_plan"] = price
+
+            # Discount percentage
+            pct_el = front.find(class_="porcentaje")
+            if pct_el:
+                pct_text = _get_text(pct_el)
+                pct_match = re.search(r"(\d+)%", pct_text)
+                if pct_match:
+                    plan["descuento"] = float(pct_match.group(1))
+
+            # Facturas con descuento (meses_descuento)
+            # Try the .facturas element first
+            fact_el = front.find(class_="facturas")
+            if fact_el:
+                fact_text = _get_text(fact_el)
+                fact_match = re.search(r"(\d+)\s*primera", fact_text)
+                if fact_match:
+                    plan["meses_descuento"] = int(fact_match.group(1))
+
+            # Fallback: search all text in the descuento div
+            if "meses_descuento" not in plan:
+                desc_div = front.find(class_="descuento")
+                if desc_div:
+                    desc_text = _get_text(desc_div)
+                    fact_match = re.search(r"(\d+)\s*primera", desc_text)
+                    if fact_match:
+                        plan["meses_descuento"] = int(fact_match.group(1))
+
+            # Payment method for discount
+            tarj_el = front.find(class_="tarjeta")
+            if tarj_el:
+                tarj_text = _get_text(tarj_el)
+                if "tarjeta" in tarj_text.lower():
+                    # The promo price applies with credit card
+                    if plan.get("precio_plan") and plan.get("descuento"):
+                        plan["precio_plan_tarjeta"] = plan["precio_plan"]
+
+            # Promo final price (con IVA)
+            final_el = front.find(class_="precio-final")
+            if final_el:
+                final_text = _get_text(final_el)
+                final_match = re.search(r"\$([\d.]+)", final_text)
+                if final_match:
+                    promo_con_iva = float(final_match.group(1))
+                    plan["precio_plan_descuento"] = _price_sin_iva(promo_con_iva)
+
+            # --- BACK: technical specs ---
+            if back:
+                # Extract normal price from .precio-final element first
+                back_precio_el = back.find(class_="precio-final")
+                if back_precio_el:
+                    bp_text = _get_text(back_precio_el)
+                    bp_match = re.search(r"\$([\d.]+)", bp_text)
+                    if bp_match and "normal" in bp_text.lower():
+                        normal_con_iva = float(bp_match.group(1))
+                        precio_normal_sin_iva = _price_sin_iva(normal_con_iva)
+                        if plan.get("descuento"):
+                            promo_price = plan.get("precio_plan")
+                            plan["precio_plan"] = precio_normal_sin_iva
+                            if promo_price:
+                                plan["precio_plan_descuento"] = promo_price
+                                # Tarjeta price = promo price when discount
+                                # requires credit card
+                                if plan.get("precio_plan_tarjeta"):
+                                    plan["precio_plan_tarjeta"] = promo_price
+
+                back_text = back.get_text(separator="|", strip=True)
+                items = [s.strip() for s in back_text.split("|") if s.strip()]
+
+                benefits: list[str] = []
+                pys_detalle: dict = {}
+
+                for item in items:
+                    item_lower = item.lower()
+
+                    # Download speed
+                    if (
+                        "vel" in item_lower
+                        and "máx" in item_lower
+                        and "descarga" in item_lower
+                    ) or (
+                        "velocidad máxima" in item_lower
+                        and "carga" not in item_lower
+                    ):
+                        spd = _extract_number(item)
+                        if spd:
+                            plan["velocidad_download_mbps"] = spd
+
+                    # Upload speed
+                    elif (
+                        "vel" in item_lower
+                        and "máx" in item_lower
+                        and "carga" in item_lower
+                    ) or (
+                        "velocidad máxima" in item_lower
+                        and "carga" in item_lower
+                    ):
+                        spd = _extract_number(item)
+                        if spd:
+                            plan["velocidad_upload_mbps"] = spd
+
+                    # Comparticion
+                    elif "compartici" in item_lower:
+                        ratio = re.search(r"(\d+:\d+)", item)
+                        if ratio:
+                            plan["comparticion"] = ratio.group(1)
+
+                    # Technology
+                    elif "xgpon" in item_lower or "fibra" in item_lower:
+                        if "xgpon" in item_lower:
+                            plan["tecnologia"] = "fibra_optica"
+
+                    # Normal price (back has "Precio Normal: $XX.XX")
+                    elif "precio normal" in item_lower and "$" in item:
+                        match = re.search(r"\$([\d.]+)", item)
+                        if match:
+                            normal_con_iva = float(match.group(1))
+                            precio_normal_sin_iva = _price_sin_iva(
+                                normal_con_iva,
+                            )
+                            # precio_plan = normal price (sin IVA, sin dcto)
+                            # precio_plan_descuento = promo price
+                            if plan.get("descuento"):
+                                promo_price = plan.get("precio_plan")
+                                plan["precio_plan"] = precio_normal_sin_iva
+                                if promo_price:
+                                    plan["precio_plan_descuento"] = promo_price
+
+                    # Services / benefits
+                    elif "paramount" in item_lower:
+                        pys_detalle["paramount_plus"] = {
+                            "tipo_plan": "paramount_plus",
+                            "meses": None,
+                            "categoria": "streaming",
+                        }
+                    elif "netlife play" in item_lower:
+                        pys_detalle["netlife_play"] = {
+                            "tipo_plan": "netlife_play",
+                            "meses": None,
+                            "categoria": "streaming",
+                        }
+                    elif "netlife defense" in item_lower:
+                        pys_detalle["netlife_defense"] = {
+                            "tipo_plan": "netlife_defense",
+                            "meses": meses_contrato or 36,
+                            "categoria": "seguridad",
+                        }
+                    elif "netlife access" in item_lower:
+                        pys_detalle["netlife_access"] = {
+                            "tipo_plan": "netlife_access",
+                            "meses": None,
+                            "categoria": "conectividad",
+                        }
+                    elif "assistance" in item_lower:
+                        pys_detalle["assistance_pro"] = {
+                            "tipo_plan": "assistance_pro",
+                            "meses": None,
+                            "categoria": "soporte",
+                        }
+                    elif "extender" in item_lower or "extensor" in item_lower:
+                        pys_detalle["extender_wifi"] = {
+                            "tipo_plan": "extender_wifi",
+                            "meses": None,
+                            "categoria": "conectividad",
+                        }
+                    elif "antivirus" in item_lower:
+                        pys_detalle["antivirus"] = {
+                            "tipo_plan": "netlife_defense",
+                            "meses": meses_contrato or 36,
+                            "categoria": "seguridad",
+                        }
+                    elif any(
+                        skip in item_lower
+                        for skip in [
+                            "quiero contratar",
+                            "menos información",
+                            "más información",
+                            "plan internet",
+                            "precio final",
+                            "precio promo",
+                            "vel. mín",
+                            "velocidad mínima",
+                        ]
+                    ):
+                        pass
+                    elif len(item) > 3:
+                        benefits.append(item)
+
+                # Speed fallback: check the arriba/front for Mbps
+                if "velocidad_download_mbps" not in plan:
+                    front_text = _get_text(front)
+                    spd_match = re.search(
+                        r"(\d+)\s*(?:Mbps|mbps)", front_text,
+                    )
+                    if spd_match:
+                        plan["velocidad_download_mbps"] = float(
+                            spd_match.group(1),
+                        )
+
+                if pys_detalle:
+                    plan["pys_adicionales_detalle"] = pys_detalle
+                    plan["pys_adicionales"] = len(pys_detalle)
+
+                if benefits:
+                    plan["beneficios_publicitados"] = "; ".join(benefits)
+
+            # Global data
+            if costo_instalacion:
+                plan["costo_instalacion"] = costo_instalacion
+            if meses_contrato:
+                plan["meses_contrato"] = meses_contrato
+            if terminos_condiciones_global.strip():
+                plan["terminos_condiciones"] = (
+                    plan.get("terminos_condiciones", "")
+                    + terminos_condiciones_global.strip()
+                )
+
+            # Dedup key
+            key = (
+                plan.get("nombre_plan", ""),
+                plan.get("velocidad_download_mbps", 0),
+                plan.get("precio_plan", 0),
+            )
+            if key in seen_keys:
+                continue
+            seen_keys.add(key)
+
+            # Only add if we have meaningful data
+            if plan.get("velocidad_download_mbps") or plan.get("precio_plan"):
+                all_plans.append(plan)
+
+    return all_plans
+
+
 def _parse_ecuanet(html: str) -> list[dict]:
     """Parse Ecuanet plan cards from rendered HTML.
 
@@ -792,13 +1329,18 @@ def _parse_puntonet(html: str) -> list[dict]:
 
 _PARSERS: dict[str, callable] = {
     "xtrim": _parse_xtrim,
-    "netlife": _parse_netlife,
+    "netlife": _parse_netlife_internet,
     "ecuanet": _parse_ecuanet,
     "alfanet": _parse_alfanet,
     "fibramax": _parse_fibramax,
     "claro": _parse_claro,
     "cnt": _parse_cnt,
     "puntonet": _parse_puntonet,
+}
+
+# ISPs that need interactive rendering (tabs, sliders, etc.)
+_INTERACTIVE_ISPS: set[str] = {
+    "netlife",  # Home / Pro / Pyme tabs on netlifeinternet.ec
 }
 
 
@@ -814,6 +1356,9 @@ def extract_plans_full_html(
 ) -> tuple[list[PlanISP], list[str]]:
     """Extract all plan fields from rendered HTML for a given ISP.
 
+    For ISPs in _INTERACTIVE_ISPS, uses interactive rendering that
+    clicks through tabs, sliders, and buttons to discover all plans.
+
     Args:
         urls: List of URLs to try (first success wins).
         isp_key: ISP identifier (e.g., "xtrim").
@@ -825,9 +1370,40 @@ def extract_plans_full_html(
     now = datetime.now()
     start_ms = int(time.time() * 1000)
 
-    # Get HTML
-    html = html_override
-    if not html:
+    use_interactive = isp_key in _INTERACTIVE_ISPS and html_override is None
+    parser = _PARSERS.get(isp_key, _parse_claro)
+
+    if html_override:
+        # Use provided HTML directly
+        try:
+            raw_plans = parser(html_override)
+        except Exception as e:
+            logger.error("Parser failed for %s: %s", isp_key, e)
+            return [], [f"Parser error: {e}"]
+    elif use_interactive:
+        # Interactive rendering: collect HTML from all tab/slider states
+        all_htmls: list[str] = []
+        for url in urls:
+            try:
+                logger.info("Interactive rendering: %s", url)
+                snapshots = _get_rendered_html_interactive(url)
+                all_htmls.extend(snapshots)
+                if all_htmls:
+                    break
+            except Exception as e:
+                logger.warning("Interactive render failed %s: %s", url, e)
+
+        if not all_htmls:
+            return [], ["Could not fetch rendered HTML (interactive)"]
+
+        try:
+            raw_plans = parser(all_htmls)
+        except Exception as e:
+            logger.error("Parser failed for %s: %s", isp_key, e)
+            return [], [f"Parser error: {e}"]
+    else:
+        # Standard single-pass rendering
+        html = None
         for url in urls:
             try:
                 logger.info("Fetching rendered HTML: %s", url)
@@ -837,16 +1413,14 @@ def extract_plans_full_html(
             except Exception as e:
                 logger.warning("Failed to render %s: %s", url, e)
 
-    if not html or len(html) < 500:
-        return [], ["Could not fetch rendered HTML"]
+        if not html or len(html) < 500:
+            return [], ["Could not fetch rendered HTML"]
 
-    # Parse with ISP-specific parser
-    parser = _PARSERS.get(isp_key, _parse_claro)
-    try:
-        raw_plans = parser(html)
-    except Exception as e:
-        logger.error("Parser failed for %s: %s", isp_key, e)
-        return [], [f"Parser error: {e}"]
+        try:
+            raw_plans = parser(html)
+        except Exception as e:
+            logger.error("Parser failed for %s: %s", isp_key, e)
+            return [], [f"Parser error: {e}"]
 
     latency_ms = int(time.time() * 1000) - start_ms
 
@@ -854,7 +1428,8 @@ def extract_plans_full_html(
     plans, errors = validate_and_build_plans(raw_plans, isp_key, now)
 
     logger.info(
-        "Full HTML: %d plans from %s (%.1fs, FREE)",
+        "Full HTML: %d plans from %s (%.1fs, FREE%s)",
         len(plans), isp_key, latency_ms / 1000,
+        ", interactive" if use_interactive else "",
     )
     return plans, errors

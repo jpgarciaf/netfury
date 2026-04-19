@@ -8,6 +8,7 @@ from settings import ISP_URLS
 # Plan page URLs (may differ from homepage)
 ISP_PLAN_URLS: dict[str, list[str]] = {
     "netlife": [
+        "https://netlifeinternet.ec/",
         "https://www.netlife.ec/planes-hogar/",
         "https://www.netlife.ec",
     ],
