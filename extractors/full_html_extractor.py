@@ -79,6 +79,8 @@ _TAB_SELECTORS = [
     # ISP-specific: netlifeinternet.ec Home/Pro/Pyme buttons
     ".planes-btn",
     ".botones button",
+    # ISP-specific: xtrim.com.ec "Planes con fútbol" / "Planes con entretenimiento"
+    "button.snap-center",
     # Generic tab selectors
     '[role="tab"]',
     ".nav-tab",
@@ -158,14 +160,43 @@ def _get_rendered_html_interactive(
         page = context.new_page()
 
         logger.info("Interactive render: loading %s", url)
-        page.goto(url, wait_until="networkidle", timeout=60000)
-        page.wait_for_timeout(wait_ms)
+        try:
+            page.goto(url, wait_until="networkidle", timeout=60000)
+        except Exception:
+            # SPA sites (Next.js) may not reach networkidle; fallback
+            logger.info(
+                "Interactive render: networkidle timeout, "
+                "retrying with domcontentloaded",
+            )
+            page.goto(url, wait_until="domcontentloaded", timeout=60000)
+        # Extra wait for SPA hydration / JS framework rendering
+        page.wait_for_timeout(max(wait_ms, 10000))
 
         # Scroll full page to trigger lazy loading
         page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         page.wait_for_timeout(2000)
         page.evaluate("window.scrollTo(0, 0)")
         page.wait_for_timeout(1000)
+
+        # Dismiss overlays, modals, popups that may block clicks
+        page.evaluate("""() => {
+            // Remove promo overlays (xtrim)
+            for (const id of ['promoOverlay', 'promoTitle', 'promoModal']) {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            }
+            // Remove generic overlays
+            document.querySelectorAll(
+                '[class*="overlay"], [class*="modal"], [class*="popup"],'
+                + ' [class*="cookie"], [class*="consent"]'
+            ).forEach(el => {
+                const style = window.getComputedStyle(el);
+                if (style.position === 'fixed' || style.position === 'absolute') {
+                    el.style.display = 'none';
+                }
+            });
+        }""")
+        page.wait_for_timeout(500)
 
         # Phase 1: Initial state
         html_snapshots.append(page.content())
@@ -186,7 +217,8 @@ def _get_rendered_html_interactive(
                     try:
                         if tab.is_visible():
                             label = tab.inner_text()[:40].strip()
-                            tab.click()
+                            # Use JS click to bypass overlay interception
+                            tab.evaluate("el => el.click()")
                             page.wait_for_timeout(interaction_wait_ms)
                             # Scroll to load lazy content in this tab
                             page.evaluate(
@@ -314,128 +346,147 @@ def _get_text(el: Tag | None) -> str:
 # ISP-specific parsers
 # ---------------------------------------------------------------------------
 
-def _parse_xtrim(html: str) -> list[dict]:
+def _parse_xtrim(htmls: str | list[str]) -> list[dict]:
     """Parse Xtrim plan cards from rendered HTML.
 
     Xtrim uses Next.js with data-testid attributes on plan elements.
+    Accepts a list of HTML snapshots from interactive rendering
+    (e.g., after clicking "Planes con fútbol" / "Planes con entretenimiento").
     """
-    soup = BeautifulSoup(html, "lxml")
+    if isinstance(htmls, str):
+        htmls = [htmls]
+
     plans: list[dict] = []
+    seen_keys: set[tuple] = set()
 
-    cards = soup.find_all(attrs={"data-testid": "plan-card-wrapper"})
-    if not cards:
-        # Fallback: try finding by class pattern
-        cards = soup.find_all("div", class_=re.compile(r"rounded-2xl.*shadow"))
+    for html in htmls:
+        soup = BeautifulSoup(html, "lxml")
 
-    for card in cards:
-        plan: dict = {"tecnologia": "fibra_optica"}
+        cards = soup.find_all(attrs={"data-testid": "plan-card-wrapper"})
+        if not cards:
+            cards = soup.find_all("div", class_=re.compile(r"rounded-2xl.*shadow"))
 
-        # Speed
-        speed_el = card.find(attrs={"data-testid": "plan-card-speed-value"})
-        if speed_el:
-            speed = _extract_number(_get_text(speed_el))
-            if speed:
-                plan["velocidad_download_mbps"] = speed
+        for card in cards:
+            plan: dict = {"tecnologia": "fibra_optica"}
 
-        # Plan name
-        name_el = card.find(attrs={"data-testid": "plan-card-name"})
-        if name_el:
-            plan["nombre_plan"] = _get_text(name_el)
+            # Speed
+            speed_el = card.find(attrs={"data-testid": "plan-card-speed-value"})
+            if speed_el:
+                speed = _extract_number(_get_text(speed_el))
+                if speed:
+                    plan["velocidad_download_mbps"] = speed
 
-        # Price
-        amount_el = card.find(attrs={"data-testid": "plan-card-amount"})
-        if amount_el:
-            price_text = _get_text(amount_el).replace("*", "")
-            price = _extract_number(price_text)
-            if price:
-                plan["precio_plan"] = price
+            # Plan name
+            name_el = card.find(attrs={"data-testid": "plan-card-name"})
+            if name_el:
+                plan["nombre_plan"] = _get_text(name_el)
 
-        # Tax info — if "+ imp." means price is sin IVA already
-        tax_el = card.find(attrs={"data-testid": "plan-card-tax"})
-        if tax_el and "imp" in _get_text(tax_el).lower():
-            pass  # Price is already sin IVA
+            # Price
+            amount_el = card.find(attrs={"data-testid": "plan-card-amount"})
+            if amount_el:
+                price_text = _get_text(amount_el).replace("*", "")
+                price = _extract_number(price_text)
+                if price:
+                    plan["precio_plan"] = price
 
-        # Promo / free invoices
-        promo_el = card.find(attrs={"data-testid": "plan-card-promo-label"})
-        if promo_el:
-            promo_text = _get_text(promo_el).lower()
-            if "factura" in promo_text and "gratis" in promo_text:
-                match = re.search(r"(\w+)\s+factura", promo_text)
-                ordinal_map = {
-                    "primera": 1, "segunda": 2, "tercera": 3,
-                    "cuarta": 4, "quinta": 5,
-                }
-                if match:
-                    plan["facturas_gratis"] = ordinal_map.get(match.group(1), 1)
+            # Tax info — if "+ imp." means price is sin IVA already
+            tax_el = card.find(attrs={"data-testid": "plan-card-tax"})
+            if tax_el and "imp" in _get_text(tax_el).lower():
+                pass  # Price is already sin IVA
 
-        # Benefits
-        benefits = []
-        benefit_items = card.find_all(attrs={"data-testid": re.compile(r"benefit-item")})
-        for item in benefit_items:
-            text = _get_text(item)
-            if text:
-                benefits.append(text)
+            # Promo / free invoices
+            promo_el = card.find(attrs={"data-testid": "plan-card-promo-label"})
+            if promo_el:
+                promo_text = _get_text(promo_el).lower()
+                if "factura" in promo_text and "gratis" in promo_text:
+                    match = re.search(r"(\w+)\s+factura", promo_text)
+                    ordinal_map = {
+                        "primera": 1, "segunda": 2, "tercera": 3,
+                        "cuarta": 4, "quinta": 5,
+                    }
+                    if match:
+                        plan["facturas_gratis"] = ordinal_map.get(match.group(1), 1)
 
-        # Additional services (apps)
-        pys_detalle: dict = {}
-        apps_container = card.find(attrs={"data-testid": "apps-container"})
-        if apps_container:
-            app_items = apps_container.find_all(
-                attrs={"data-testid": re.compile(r"app-item")},
-            )
-            for app in app_items:
-                app_text = _get_text(app).strip()
-                if not app_text:
-                    continue
-                # Classify the service
-                text_lower = app_text.lower()
-                if "disney" in text_lower:
-                    key = "disney_plus"
-                    categoria = "streaming"
-                    tipo = "disney_plus_premium" if "premium" in text_lower else "disney_plus_basic"
-                elif "zapping" in text_lower:
-                    key = "zapping"
-                    categoria = "streaming"
-                    tipo = "zapping_basico"
-                elif "liga" in text_lower or "ecuabet" in text_lower:
-                    key = "liga_ecuabet"
-                    categoria = "streaming"
-                    tipo = "liga_ecuabet"
-                elif "instalaci" in text_lower:
-                    if "gratis" in text_lower:
-                        plan["costo_instalacion"] = 0.0
-                    benefits.append(app_text)
-                    continue
-                elif "router" in text_lower:
-                    benefits.append(app_text)
-                    continue
-                else:
-                    key = _to_snake_case(app_text)
-                    categoria = "otros"
-                    tipo = _to_snake_case(app_text)
+            # Benefits
+            benefits = []
+            benefit_items = card.find_all(attrs={"data-testid": re.compile(r"benefit-item")})
+            for item in benefit_items:
+                text = _get_text(item)
+                if text:
+                    benefits.append(text)
 
-                pys_detalle[key] = {
-                    "tipo_plan": tipo,
-                    "meses": None,
-                    "categoria": categoria,
-                }
+            # Additional services (apps)
+            pys_detalle: dict = {}
+            apps_container = card.find(attrs={"data-testid": "apps-container"})
+            if apps_container:
+                app_items = apps_container.find_all(
+                    attrs={"data-testid": re.compile(r"app-item")},
+                )
+                for app in app_items:
+                    app_text = _get_text(app).strip()
+                    if not app_text:
+                        continue
+                    # Classify the service
+                    text_lower = app_text.lower()
+                    if "disney" in text_lower:
+                        svc_key = "disney_plus"
+                        categoria = "streaming"
+                        tipo = "disney_plus_premium" if "premium" in text_lower else "disney_plus_basic"
+                    elif "zapping" in text_lower:
+                        svc_key = "zapping"
+                        categoria = "streaming"
+                        tipo = "zapping_basico"
+                    elif "liga" in text_lower or "ecuabet" in text_lower:
+                        svc_key = "liga_ecuabet"
+                        categoria = "streaming"
+                        tipo = "liga_ecuabet"
+                    elif "hbo" in text_lower:
+                        svc_key = "hbo"
+                        categoria = "streaming"
+                        tipo = "hbo"
+                    elif "instalaci" in text_lower:
+                        if "gratis" in text_lower:
+                            plan["costo_instalacion"] = 0.0
+                        benefits.append(app_text)
+                        continue
+                    elif "router" in text_lower:
+                        benefits.append(app_text)
+                        continue
+                    else:
+                        svc_key = _to_snake_case(app_text)
+                        categoria = "otros"
+                        tipo = _to_snake_case(app_text)
 
-        if pys_detalle:
-            plan["pys_adicionales_detalle"] = pys_detalle
-            plan["pys_adicionales"] = len(pys_detalle)
+                    pys_detalle[svc_key] = {
+                        "tipo_plan": tipo,
+                        "meses": None,
+                        "categoria": categoria,
+                    }
 
-        if benefits:
-            plan["beneficios_publicitados"] = "; ".join(benefits)
+            if pys_detalle:
+                plan["pys_adicionales_detalle"] = pys_detalle
+                plan["pys_adicionales"] = len(pys_detalle)
 
-        # Legal text
-        legal_el = card.find(attrs={"data-testid": "plan-card-legal"})
-        if legal_el:
-            plan["terminos_condiciones"] = _get_text(legal_el)
+            if benefits:
+                plan["beneficios_publicitados"] = "; ".join(benefits)
 
-        # Only add if we have meaningful data
-        if plan.get("nombre_plan") or plan.get("velocidad_download_mbps"):
-            plan.setdefault("nombre_plan", f"Plan {plan.get('velocidad_download_mbps', 0):.0f} Mbps")
-            plans.append(plan)
+            # Legal text
+            legal_el = card.find(attrs={"data-testid": "plan-card-legal"})
+            if legal_el:
+                plan["terminos_condiciones"] = _get_text(legal_el)
+
+            # Only add if we have meaningful data
+            if plan.get("nombre_plan") or plan.get("velocidad_download_mbps"):
+                plan.setdefault("nombre_plan", f"Plan {plan.get('velocidad_download_mbps', 0):.0f} Mbps")
+                # Deduplicate by (name, speed, price)
+                dedup_key = (
+                    plan.get("nombre_plan", ""),
+                    plan.get("velocidad_download_mbps", 0),
+                    plan.get("precio_plan", 0),
+                )
+                if dedup_key not in seen_keys:
+                    seen_keys.add(dedup_key)
+                    plans.append(plan)
 
     return plans
 
@@ -1341,6 +1392,7 @@ _PARSERS: dict[str, callable] = {
 # ISPs that need interactive rendering (tabs, sliders, etc.)
 _INTERACTIVE_ISPS: set[str] = {
     "netlife",  # Home / Pro / Pyme tabs on netlifeinternet.ec
+    "xtrim",    # "Planes con fútbol" / "Planes con entretenimiento" toggle
 }
 
 

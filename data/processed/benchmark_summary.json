@@ -1,16 +1,16 @@
 {
-  "extraction_date": "2026-04-18T22:01:13.846349",
+  "extraction_date": "2026-04-18T22:21:42.450288",
   "strategy": "full_html",
-  "total_plans": 4,
+  "total_plans": 9,
   "total_isps_processed": 1,
   "isps_with_data": 1,
-  "avg_fields_filled": 16.0,
+  "avg_fields_filled": 15.7,
   "total_possible_fields": 30,
-  "field_coverage_pct": 53.3,
+  "field_coverage_pct": 52.2,
   "details": [
     {
       "isp": "xtrim",
-      "plans_extracted": 4,
+      "plans_extracted": 9,
       "errors": 0,
       "status": "ok"
     }

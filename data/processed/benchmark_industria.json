@@ -1,6 +1,6 @@
 [
   {
-    "fecha": "2026-04-18T22:01:13.846547",
+    "fecha": "2026-04-18T22:21:42.450553",
     "anio": 2026,
     "mes": 4,
     "dia": 18,
@@ -48,7 +48,7 @@
     "beneficios_publicitados": "routerRouter adicional GRATIS con cualquier forma de pago; checkCuarta factura GRATIS; wifiInstalación GRATIS"
   },
   {
-    "fecha": "2026-04-18T22:01:13.846547",
+    "fecha": "2026-04-18T22:21:42.450553",
     "anio": 2026,
     "mes": 4,
     "dia": 18,
@@ -76,7 +76,7 @@
       "hbo": {
         "tipo_plan": "hbo",
         "meses": null,
-        "categoria": "otros"
+        "categoria": "streaming"
       },
       "zapping": {
         "tipo_plan": "zapping_basico",
@@ -96,7 +96,7 @@
     "beneficios_publicitados": "routerRouter adicional GRATIS con cualquier forma de pago; checkCuarta factura GRATIS; wifiInstalación GRATIS"
   },
   {
-    "fecha": "2026-04-18T22:01:13.846547",
+    "fecha": "2026-04-18T22:21:42.450553",
     "anio": 2026,
     "mes": 4,
     "dia": 18,
@@ -139,7 +139,7 @@
     "beneficios_publicitados": "routerRouter adicional GRATIS pagando con TC; checkCuarta factura GRATIS; wifiInstalación GRATIS"
   },
   {
-    "fecha": "2026-04-18T22:01:13.846547",
+    "fecha": "2026-04-18T22:21:42.450553",
     "anio": 2026,
     "mes": 4,
     "dia": 18,
@@ -180,5 +180,198 @@
     "factura_anterior": null,
     "terminos_condiciones": "Precio indefinido",
     "beneficios_publicitados": "routerRouter adicional GRATIS pagando con TC; checkCuarta factura GRATIS; wifiInstalación GRATIS"
+  },
+  {
+    "fecha": "2026-04-18T22:21:42.450553",
+    "anio": 2026,
+    "mes": 4,
+    "dia": 18,
+    "empresa": "SETEL S.A.",
+    "marca": "Xtrim",
+    "nombre_plan": "Plan Supreme Plus",
+    "velocidad_download_mbps": 1000.0,
+    "velocidad_upload_mbps": null,
+    "precio_plan": 29.57,
+    "precio_plan_tarjeta": null,
+    "precio_plan_debito": null,
+    "precio_plan_efectivo": null,
+    "precio_plan_descuento": null,
+    "descuento": null,
+    "meses_descuento": null,
+    "costo_instalacion": 0.0,
+    "comparticion": null,
+    "pys_adicionales": 3,
+    "pys_adicionales_detalle": {
+      "disney_plus": {
+        "tipo_plan": "disney_plus_premium",
+        "meses": null,
+        "categoria": "streaming"
+      },
+      "hbo": {
+        "tipo_plan": "hbo",
+        "meses": null,
+        "categoria": "streaming"
+      },
+      "zapping": {
+        "tipo_plan": "zapping_basico",
+        "meses": null,
+        "categoria": "streaming"
+      }
+    },
+    "meses_contrato": null,
+    "facturas_gratis": 4,
+    "tecnologia": "fibra_optica",
+    "sectores": [],
+    "parroquia": [],
+    "canton": [],
+    "provincia": [],
+    "factura_anterior": null,
+    "terminos_condiciones": "Precio indefinido",
+    "beneficios_publicitados": "routerRouter adicional GRATIS con cualquier forma de pago; checkCuarta factura GRATIS; wifiInstalación GRATIS"
+  },
+  {
+    "fecha": "2026-04-18T22:21:42.450553",
+    "anio": 2026,
+    "mes": 4,
+    "dia": 18,
+    "empresa": "SETEL S.A.",
+    "marca": "Xtrim",
+    "nombre_plan": "Plan Elite Plus",
+    "velocidad_download_mbps": 800.0,
+    "velocidad_upload_mbps": null,
+    "precio_plan": 23.8,
+    "precio_plan_tarjeta": null,
+    "precio_plan_debito": null,
+    "precio_plan_efectivo": null,
+    "precio_plan_descuento": null,
+    "descuento": null,
+    "meses_descuento": null,
+    "costo_instalacion": 0.0,
+    "comparticion": null,
+    "pys_adicionales": 2,
+    "pys_adicionales_detalle": {
+      "disney_plus": {
+        "tipo_plan": "disney_plus_premium",
+        "meses": null,
+        "categoria": "streaming"
+      },
+      "zapping": {
+        "tipo_plan": "zapping_basico",
+        "meses": null,
+        "categoria": "streaming"
+      }
+    },
+    "meses_contrato": null,
+    "facturas_gratis": 4,
+    "tecnologia": "fibra_optica",
+    "sectores": [],
+    "parroquia": [],
+    "canton": [],
+    "provincia": [],
+    "factura_anterior": null,
+    "terminos_condiciones": "Precio indefinido",
+    "beneficios_publicitados": "routerRouter adicional GRATIS pagando con TC; checkCuarta factura GRATIS; wifiInstalación GRATIS"
+  },
+  {
+    "fecha": "2026-04-18T22:21:42.450553",
+    "anio": 2026,
+    "mes": 4,
+    "dia": 18,
+    "empresa": "SETEL S.A.",
+    "marca": "Xtrim",
+    "nombre_plan": "Plan Advance",
+    "velocidad_download_mbps": 500.0,
+    "velocidad_upload_mbps": null,
+    "precio_plan": 16.63,
+    "precio_plan_tarjeta": null,
+    "precio_plan_debito": null,
+    "precio_plan_efectivo": null,
+    "precio_plan_descuento": null,
+    "descuento": null,
+    "meses_descuento": null,
+    "costo_instalacion": null,
+    "comparticion": null,
+    "pys_adicionales": 1,
+    "pys_adicionales_detalle": {
+      "zapping": {
+        "tipo_plan": "zapping_basico",
+        "meses": null,
+        "categoria": "streaming"
+      }
+    },
+    "meses_contrato": null,
+    "facturas_gratis": 4,
+    "tecnologia": "fibra_optica",
+    "sectores": [],
+    "parroquia": [],
+    "canton": [],
+    "provincia": [],
+    "factura_anterior": null,
+    "terminos_condiciones": "Precio indefinido",
+    "beneficios_publicitados": "checkCuarta factura GRATIS; wifiInstalación GRATS"
+  },
+  {
+    "fecha": "2026-04-18T22:21:42.450553",
+    "anio": 2026,
+    "mes": 4,
+    "dia": 18,
+    "empresa": "SETEL S.A.",
+    "marca": "Xtrim",
+    "nombre_plan": "Plan Essential",
+    "velocidad_download_mbps": 300.0,
+    "velocidad_upload_mbps": null,
+    "precio_plan": 15.52,
+    "precio_plan_tarjeta": null,
+    "precio_plan_debito": null,
+    "precio_plan_efectivo": null,
+    "precio_plan_descuento": null,
+    "descuento": null,
+    "meses_descuento": null,
+    "costo_instalacion": 0.0,
+    "comparticion": null,
+    "pys_adicionales": 0,
+    "pys_adicionales_detalle": {},
+    "meses_contrato": null,
+    "facturas_gratis": 4,
+    "tecnologia": "fibra_optica",
+    "sectores": [],
+    "parroquia": [],
+    "canton": [],
+    "provincia": [],
+    "factura_anterior": null,
+    "terminos_condiciones": "Precio indefinido",
+    "beneficios_publicitados": "checkCuarta factura GRATIS; wifiInstalación GRATIS"
+  },
+  {
+    "fecha": "2026-04-18T22:21:42.450553",
+    "anio": 2026,
+    "mes": 4,
+    "dia": 18,
+    "empresa": "SETEL S.A.",
+    "marca": "Xtrim",
+    "nombre_plan": "Plan Essential",
+    "velocidad_download_mbps": 200.0,
+    "velocidad_upload_mbps": null,
+    "precio_plan": 15.52,
+    "precio_plan_tarjeta": null,
+    "precio_plan_debito": null,
+    "precio_plan_efectivo": null,
+    "precio_plan_descuento": null,
+    "descuento": null,
+    "meses_descuento": null,
+    "costo_instalacion": 0.0,
+    "comparticion": null,
+    "pys_adicionales": 0,
+    "pys_adicionales_detalle": {},
+    "meses_contrato": null,
+    "facturas_gratis": 4,
+    "tecnologia": "fibra_optica",
+    "sectores": [],
+    "parroquia": [],
+    "canton": [],
+    "provincia": [],
+    "factura_anterior": null,
+    "terminos_condiciones": "Precio indefinido",
+    "beneficios_publicitados": "checkCuarta factura GRATIS; wifiInstalación GRATIS"
   }
 ]
